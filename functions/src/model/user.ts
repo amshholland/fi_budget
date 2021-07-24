@@ -7,10 +7,10 @@ export default interface User {
 
 interface GoogleUser {
     googleId: string;
-    name: string | undefined | null;
-    email: string | undefined | null;
-    userCreated: string | undefined | null;
-    lastSignIn: string | undefined | null;
-    photoURL: string | undefined | null;
-    budgetDay: number | undefined | null;
+    name: string;
+    email: string;
+    userCreated: string;
+    lastSignIn: string;
+    photoURL: string;
+    budgetDay: number;
 }

@@ -1,9 +1,14 @@
 export interface User {
-    _id: string;
-    name: string | undefined | null;
-    email: string | undefined | null;
-    userCreated: string | undefined | null;
-    lastSignIn: string | undefined | null;
-    photoURL: string | undefined | null;
-    budgetDay: number | undefined | null;
+    _id?: string;
+    googleUser: GoogleUser;
+}
+
+export interface GoogleUser {
+    googleId: string;
+    name: string;
+    email: string;
+    userCreated: string;
+    lastSignIn: string;
+    photoURL: string;
+    budgetDay: number;
 }
