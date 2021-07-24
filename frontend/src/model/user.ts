@@ -1,6 +1,6 @@
 export interface User {
     _id?: string;
-    googleUser: GoogleUser;
+    googleUser: GoogleUser[];
 }
 
 export interface GoogleUser {
