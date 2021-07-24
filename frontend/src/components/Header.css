@@ -1,0 +1,21 @@
+.Header {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.loggedInHeader {
+    display: flex;
+}
+
+.googleUser {}
+
+.userPhoto img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.headerNav {
+    height: 10%;
+}

@@ -1,0 +1,1 @@
+export { default as budget } from "./routes/budget";
