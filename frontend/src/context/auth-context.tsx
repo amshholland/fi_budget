@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { addNewUser, getUserById } from "../service/UserService";
+import { addNewUser, getAccountData, getUserById } from "../service/UserService";
 
 import { User } from "../model/user";
 import firebase from '../firebaseConfig';
@@ -23,21 +23,26 @@ export function AuthContextProvider( { children }: { children: ReactNode; } ) {
     useEffect( () => {
         return firebase.auth().onAuthStateChanged( newUser => {
             setUser( newUser );
-            addUser( newUser! );
+            console.log( getAccountData() );
+            if ( newUser ) {
+                console.log( newUser );
+                addUser( newUser );
+            }
         } );
     }, [] );
 
     async function addUser( user: firebase.User ) {
         let existingUser = getUserById( user.uid ).then( setUserFromDb );
+        console.log( `existing user: ${ existingUser }` );
+
         if ( !existingUser ) {
             let newUser = {
-                _id: user.uid,
-                name: user.displayName,
-                email: user.email,
-                userCreated: user.metadata.creationTime,
-                lastSignIn: user.metadata.lastSignInTime,
-                photoURL: user.photoURL,
-                budgetDay: undefined
+                googleId: user.uid,
+                name: user.displayName || '',
+                email: user.email || '',
+                userCreated: user.metadata.creationTime || '',
+                lastSignIn: user.metadata.lastSignInTime || '',
+                photoURL: user.photoURL || ''
             };
             addNewUser( newUser );
             setUserFromDb( newUser );

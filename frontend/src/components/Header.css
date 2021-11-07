@@ -1,19 +1,32 @@
 .Header {
     width: 100vw;
+    height: 10%;
     display: flex;
-    flex-direction: column;
+    align-items: baseline;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+}
+
+.logoDiv,
+.logo {
+    height: 100%;
+}
+
+.headerButton {
+    margin-left: auto;
 }
 
 .loggedInHeader {
-    display: flex;
+    position: absolute;
+    width: 100%;
 }
-
-.googleUser {}
 
 .userPhoto img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
+    margin-right: 0;
 }
 
 .headerNav {

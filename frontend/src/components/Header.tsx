@@ -21,12 +21,11 @@ function Header() {
 
     const history = useHistory();
 
-
     return (
         <header className="Header" id="header">
             <div className="logoDiv">
                 <a href="/">
-                    <img className="logo" src={ process.env.PUBLIC_URL + '/FI_Logo.png' } alt="Financial Independence Logo" />
+                    <img className="logo" src={ process.env.PUBLIC_URL + '/logo192.png' } alt="Financial Independence Logo" />
                 </a>
             </div>
             { user && (
@@ -56,7 +55,7 @@ function Header() {
             <div className="googleAuth">
                 { !user && (
                     <button className="headerButton" onClick={ signInWithGoogle }>
-                        Sign in
+                        Sign In
                     </button>
                 ) }
             </div>

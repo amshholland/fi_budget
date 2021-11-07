@@ -1,14 +1,14 @@
-export interface User {
+export interface Account {
     _id?: string;
-    googleUser: GoogleUser[];
+    user: User[];
+    budgetDay?: number;
 }
 
-export interface GoogleUser {
+export interface User {
     googleId: string;
     name: string;
     email: string;
     userCreated: string;
     lastSignIn: string;
     photoURL: string;
-    budgetDay: number;
 }

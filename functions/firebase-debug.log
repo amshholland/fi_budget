@@ -1,0 +1,35 @@
+[debug] [2021-11-07T19:44:37.475Z] ----------------------------------------------------------------------
+[debug] [2021-11-07T19:44:37.479Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\amber\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only functions
+[debug] [2021-11-07T19:44:37.480Z] CLI Version:   9.16.5
+[debug] [2021-11-07T19:44:37.480Z] Platform:      win32
+[debug] [2021-11-07T19:44:37.480Z] Node Version:  v14.16.0
+[debug] [2021-11-07T19:44:37.482Z] Time:          Sun Nov 07 2021 14:44:37 GMT-0500 (Eastern Standard Time)
+[debug] [2021-11-07T19:44:37.483Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-11-07T19:44:37.586Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-11-07T19:44:37.587Z] > authorizing via signed-in user (amshhollanddev@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2021-11-07T19:44:37.636Z] [hub] writing locator at C:\Users\amber\AppData\Local\Temp\hub-fibudget.json
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub, storage\u001b[22m"}}
+[info] +  functions: Using node@14 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@14 from host."}}
+[debug] [2021-11-07T19:44:37.706Z] defaultcredentials: writing to file C:\Users\amber\AppData\Roaming\firebase\amshhollanddev_gmail_com_application_default_credentials.json
+[debug] [2021-11-07T19:44:37.711Z] Setting GAC to C:\Users\amber\AppData\Roaming\firebase\amshhollanddev_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\amber\\AppData\\Roaming\\firebase\\amshhollanddev_gmail_com_application_default_credentials.json"}}
+[debug] [2021-11-07T19:44:37.714Z] > refreshing access token with scopes: []
+[debug] [2021-11-07T19:44:37.716Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-11-07T19:44:37.910Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Sun, 07 Nov 2021 19:44:16 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-11-07T19:44:37.938Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fibudget/adminSdkConfig [none]
+[debug] [2021-11-07T19:44:38.332Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fibudget/adminSdkConfig 200
+[debug] [2021-11-07T19:44:38.333Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fibudget/adminSdkConfig {"projectId":"fibudget","storageBucket":"fibudget.appspot.com"}
+[debug] [2021-11-07T19:44:38.363Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-11-07T19:44:38.364Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-11-07T19:44:38.364Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\amber\\.cache\\firebase\\emulators\\ui-v1.6.2\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\amber\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.6.2\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2021-11-07T19:44:38.588Z] Web / API server started at localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4000\n"}}
+[info] i  functions: Watching "C:\Users\amber\OneDrive\Documents\GrandCircus\Deliverables\fi_budget\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"C:\\Users\\amber\\OneDrive\\Documents\\GrandCircus\\Deliverables\\fi_budget\\functions\" for Cloud Functions..."}}
+[debug] [2021-11-07T19:44:38.691Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2021-11-07T19:44:38.692Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2021-11-07T19:44:38.693Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2021-11-07T19:44:38.693Z] [worker-~diagnostic~-903bc592-fc08-4b9c-8824-7533083c84c0]: Assigning socketPath: \\?\pipe\C:\Users\amber\OneDrive\Documents\GrandCircus\Deliverables\fi_budget\functions\2676 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-903bc592-fc08-4b9c-8824-7533083c84c0]: Assigning socketPath: \\\\?\\pipe\\C:\\Users\\amber\\OneDrive\\Documents\\GrandCircus\\Deliverables\\fi_budget\\functions\\2676"}}
+[debug] [2021-11-07T19:44:38.694Z] [worker-~diagnostic~-903bc592-fc08-4b9c-8824-7533083c84c0]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-903bc592-fc08-4b9c-8824-7533083c84c0]: BUSY"}}

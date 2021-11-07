@@ -1,16 +1,16 @@
 import { ObjectId } from "mongodb";
 
-export default interface User {
+export default interface Account {
     _id?: ObjectId;
-    googleUser: GoogleUser[];
+    users: User[];
+    budgetDay?: number;
 }
 
-interface GoogleUser {
+interface User {
     googleId: string;
     name: string;
     email: string;
     userCreated: string;
     lastSignIn: string;
     photoURL: string;
-    budgetDay: number;
 }
