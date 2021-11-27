@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 
 import Account from '../model/user';
+import { ObjectId } from 'bson';
 import cors from 'cors';
 import express from 'express';
 import { getClient } from '../db';
@@ -9,19 +10,23 @@ const app = express();
 app.use( cors() );
 app.use( express.json() );
 
-// Get user account
-// app.get( "/", async ( req, res ) => {
-//     const userId = String( req.query.userId || '' );
-//     try {
-//         const client = await getClient();
-//         const results = await client.db().collection<Account>( 'accounts' ).find( { userId: userId } ).toArray();
-//         console.log( `GET ${ userId }` );
-//         res.json( results );
-//     } catch ( err ) {
-//         console.error( "FAIL", err );
-//         res.status( 500 ).json( { message: "Internal Server Error" } );
-//     }
-// } );
+// Get user account;
+app.get( "/id", async ( req, res ) => {
+    const id = String( req.query._id || '' );
+    try {
+        const client = await getClient();
+        const account = await client.db().collection<Account>( 'accounts' ).findOne( { _id: new ObjectId( id ) } );
+        if ( account ) {
+            res.json( account );
+        } else {
+            res.status( 404 ).json( { message: "Not Found" } );
+        }
+        console.log( `GET ${ id }` );
+    } catch ( err ) {
+        console.error( "FAIL", err );
+        res.status( 500 ).json( { message: "Internal Server Error" } );
+    }
+} );
 
 app.get( "/", async ( req, res ) => {
     try {
