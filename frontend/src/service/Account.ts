@@ -15,25 +15,25 @@ export async function getAccountByGoogleId( googleUser: firebase.User ) {
         console.log( res );
     } ).catch( function ( error ) {
         console.log( error );
-
+        console.log( "user does not exist" );
         createAccount( googleUser );
     } );
 
 }
 
 export function createAccount( googleUser: firebase.User ): Promise<Account> {
-
-    // const user: Account = {
-    //     user: [ {
-    //         googleId: googleUser.uid,
-    //         name: googleUser.displayName || '',
-    //         email: googleUser.email || '',
-    //         userCreated: googleUser.metadata.creationTime || '',
-    //         lastSignIn: googleUser.metadata.lastSignInTime || '',
-    //         photoURL: googleUser.photoURL || ''
-    //     } ]
-    // };
-    return axios.post( `${ baseUrl }/accounts`, googleUser ).then( res => res.data );
+    console.log( "creating user" );
+    const user: Account = {
+        user: [ {
+            googleId: googleUser.uid,
+            name: googleUser.displayName || '',
+            email: googleUser.email || '',
+            userCreated: googleUser.metadata.creationTime || '',
+            lastSignIn: googleUser.metadata.lastSignInTime || '',
+            photoURL: googleUser.photoURL || ''
+        } ]
+    };
+    return axios.post( `${ baseUrl }/accounts`, user ).then( res => res.data );
 }
 
 // export function getAccountData( user: User ): Promise<Account[]> {
