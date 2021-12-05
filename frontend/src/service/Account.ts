@@ -35,10 +35,3 @@ export function createAccount( googleUser: firebase.User ): Promise<Account> {
     };
     return axios.post( `${ baseUrl }/accounts`, user ).then( res => res.data );
 }
-
-// export function getAccountData( user: User ): Promise<Account[]> {
-//     // if (nodeEnvironment === "development") { //for offline development
-//     //     return Promise.resolve(trucks);
-//     // }
-//     return axios.get( `${ baseUrl }/accounts`, user ).then( res => res.data );
-// }
