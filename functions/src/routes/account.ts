@@ -1,7 +1,6 @@
 import * as functions from 'firebase-functions';
 
 import { Account } from '../model/account';
-import { ObjectId } from 'bson';
 import cors from 'cors';
 import express from 'express';
 import { getClient } from '../db';
@@ -11,11 +10,13 @@ app.use( cors() );
 app.use( express.json() );
 
 
-app.get( "/:id", async ( req, res ) => {
-    const id = String( req.params.id || '' );
+app.get( "/:googleId", async ( req, res ) => {
+    const id = String( req.params.googleId || '' );
     try {
         const client = await getClient();
-        const account = await client.db().collection<Account>( 'accounts' ).findOne( { _id: new ObjectId( id ) } );
+        const account = await client.db().collection<Account>( 'accounts' ).findOne( {
+            "user.googleId": id
+        } );
         if ( account ) {
             res.json( account );
         } else {
@@ -42,8 +43,9 @@ app.post( "/", async ( req, res ) => {
     const newUser = req.body as Account;
     try {
         const client = await getClient();
-        const results = await client.db().collection<Account>( 'accounts' ).insertOne( newUser );
-        res.json( results );
+        const result = await client.db().collection<Account>( 'accounts' ).insertOne( newUser );
+        newUser._id = result.insertedId;
+        res.json( result );
     } catch ( err ) {
         console.error( "FAIL", err );
         res.status( 500 ).json( { message: "Internal Server Error" } );
