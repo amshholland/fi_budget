@@ -1,6 +1,4 @@
-import { Account, User } from '../model/account';
-import { useContext, useState } from "react";
-
+import { Account } from '../model/account';
 import axios from "axios";
 import firebase from '../firebaseConfig';
 
@@ -9,20 +7,16 @@ if ( !baseUrl ) {
     console.error( "REACT_APP_API_URL environment variable not set." );
 }
 
-export async function getAccountByGoogleId( googleUser: firebase.User ) {
-    axios.get( `${ baseUrl }/accounts/${ googleUser.uid }`, {
-    } ).then( function ( res ) {
-        console.log( res );
-    } ).catch( function ( error ) {
-        console.log( error );
-        console.log( "user does not exist" );
-        createAccount( googleUser );
-    } );
-
+export async function getAccountByGoogleId( googleUser: firebase.User ): Promise<Account> {
+    return axios.get( `${ baseUrl }/accounts/${ googleUser.uid }` ).then( res => res.data )
+        .catch( function ( error ) {
+            console.log( error );
+            console.log( "user does not exist" );
+            createAccount( googleUser );
+        } );
 }
 
 export function createAccount( googleUser: firebase.User ): Promise<Account> {
-    console.log( "creating user" );
     const user: Account = {
         user: [ {
             googleId: googleUser.uid,
