@@ -2,8 +2,9 @@ import { AuthContext } from "../context/auth-context";
 import { useContext } from 'react';
 
 export function Create() {
-    const { user } = useContext( AuthContext );
+    const { user, userFromDb } = useContext( AuthContext );
 
+    console.log( userFromDb );
     function addRow() {
 
     }
