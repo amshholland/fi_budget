@@ -8,8 +8,6 @@ def connect():
         # read connection parameters
         params = config()
 
-        print(params)
-
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
         conn = psycopg2.connect(**params)
@@ -29,10 +27,6 @@ def connect():
         cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
 
 
 connect()
