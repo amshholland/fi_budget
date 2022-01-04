@@ -6,6 +6,7 @@ from flask import g
 from flask import redirect
 from flask import request
 from flask import session
+from flask import json
 from flask import url_for, abort, render_template, flash
 from functools import wraps
 from hashlib import md5
@@ -13,70 +14,38 @@ from peewee import *
 from config import config
 
 params = config()
+SECRET_KEY = 'hin6bab8ge25*r=x&amp;+5$0kn=-#log$pt^#@vrqjld!^2ci@g*b'
+
 
 app = Flask(__name__)
 app.config.from_object(__name__)
 
 database = PostgresqlDatabase(**params)
 
+
 class BaseModel(Model):
-  class Meta:
-    database = database
+    class Meta:
+        database = database
 
 
-class Expense(BaseModel):
-  transactionId = CharField()
-  accountId = CharField()
-  category = CharField()
-  amount = FloatField()
-  date = DateField()
-  note = CharField()
+class Budget(BaseModel):
+    transactionId = AutoField(null=True)
+    accountId = CharField()
+    categoryType = CharField()
+    category = CharField()
+    amount = FloatField()
+    date = DateTimeField(null=True)
+    note = CharField(null=True)
 
-  def expenses():
-    return (Expense
-            .select()
-            .where(accountId == accountId))
-
-
-class Income(BaseModel):
-  transactionId = CharField()
-  accountId = CharField()
-  category = CharField()
-  amount = FloatField()
-  date = DateField()
-  note = CharField()
-
-  def incomes():
-    return (Income
-            .select()
-            .where(accountId == accountId))
-
-
-class Bill(BaseModel):
-  transactionId = CharField()
-  accountId = CharField()
-  category = CharField()
-  amount = FloatField()
-  date = DateField()
-  note = CharField()
-
-  def bills():
-    return (Bill
-            .select()
-            .where(accountId == accountId))
+    def budgets():
+        return (Budget
+                .select())
 
 
 def create_tables():
-  with database:
-    database.create_tables([Expense, Income, Bill])
-
-
-def object_list(template_name, qr, var_name='object_list', **kwargs):
-    kwargs.update(
-        page=int(request.args.get('page', 1)),
-        pages=qr.count() / 20 + 1)
-    kwargs[var_name] = qr.paginate(kwargs['page'])
-    return render_template(template_name, **kwargs)
+    print('create tables')
+    with database:
+        database.create_tables([Budget])
 
 
 def get_object_or_404(model, *expressions):
@@ -88,92 +57,61 @@ def get_object_or_404(model, *expressions):
 
 @app.before_request
 def before_request():
-  g.db = database
-  g.db.connect()
+    g.db = database
+    g.db.connect()
 
 
 @app.after_request
 def after_request(response):
-  g.db.close()
-  return response
+    g.db.close()
+    return response
 
 
-def errorhandler(e):
-  """Handle error"""
-  if not isinstance(e, HTTPException):
-    e = InternalServerError()
-  return apology(e.name, e.code)
+@app.route("/", methods=["GET", "POST"])
+def hello():
+    return "Welcome to Python Flask."
 
 
-for code in default_exceptions:
-  app.errorhandler(code)(errorhandler)
+@app.route("/add", methods=["GET", "POST"])
+def addBudget():
+
+    data = request.get_json()
+    print(data)
+    if request.method == 'POST':
+      row1 = Budget(accountId="eMf8kHHMLUbilhlZAE8YzpWbzBj1",
+                    categoryType="bill",
+                    category="Consumers",
+                    amount=100)
+      row2 = Budget(accountId="eMf8kHHMLUbilhlZAE8YzpWbzBj1",
+                    categoryType="bill",
+                    category="Consumers",
+                    amount=100)
+
+      Budget.bulk_create([row1, row2]
+                         # accountId=data.get('accountId'),
+                         # categoryType=data.get('categoryType'),
+                         # category=data.get('category'),
+                         # amount=data.get('amount'),
+                         # date=datetime.datetime,
+                         # note=data.get('note')
+                         )
+    return json_response({'success': 'budget found'}, 200)
 
 
-@ app.route("/customize", methods=["GET", "POST"])
-def customize():
-    """Customize budget"""
-
-    id = session["user_id"]
-
-    if request.method == "POST":
-
-        day = request.form.get('day')
-        update = cursor.execute(
-            "UPDATE users SET budget_day = ? WHERE id = ?", (day, id))
-
-        income = "income"
-        in_type = request.form.get('in_type')
-        in_amount = request.form.get('in_amount')
-        in_date = request.form.get('in_date')
-
-        income_insert = cursor.execute(
-            "INSERT INTO budget_tbl (id, ie, category, amount, date) VALUES (?, ?, ?, ?, ?)", (id, income, in_type, in_amount, in_date))
-        conn.commit(update, income_insert)
-
-        return render_template("index.php")
-
-    else:
-        # Direct user to customize page
-        return render_template("customize.php", id=id)
-
-
-@ app.route("/test")
-def customized():
-    """Customize budget"""
-
-    # Direct user to customize page
-    return render_template("test.php")
-
-
-@ app.route("/add", methods=["GET", "POST"])
-def add():
-    """Add to budget"""
-
-    return render_template("register.html")
-
-
-@ app.route("/budget", methods=["GET", "POST"])
+@app.route("/budget", methods=["GET", "POST"])
 def budget():
-    """Complete monthly budget"""
-
-    return render_template("register.html")
-
-
-@ app.route("/net worth", methods=["GET", "POST"])
-def net_worth():
-    """Displays timeline of net worth"""
-
-    return render_template("register.html")
+    budget = Budget.select()
+    if budget:
+        return json_response(budget('data'))
+    else:
+        return json_response({'error': 'budget not found'}, 404)
 
 
-@ app.route("/goals", methods=["GET", "POST"])
-def goals():
-    """Determine monthly, yearly, and ultimate financial goals"""
-
-    return render_template("goals.html")
+def json_response(payload, status=200):
+    return (json.dumps(payload), status, {'content-categoryType': 'application/json'})
 
 
 if __name__ == '__main__':
     # Run the app server on localhost: 443
-  create_tables()
-  app.run('localhost', 5000)
+    create_tables()
+    app.run(host='localhost', port=5000)
