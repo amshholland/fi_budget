@@ -9,12 +9,12 @@ import Budget from '../model/budget';
 export function Create() {
   const { user, userFromDb } = useContext( AuthContext );
   const [ rows, setRows ] = useState<Budget[]>( [] );
-  const [ row, setRow ] = useState<Budget>();
+  const [ data, setData ] = useState<Budget[]>();
   const [ category, setCategory ] = useState( '' );
   const [ amount, setAmount ] = useState( 0 );
   const [ date, setDate ] = useState( new Date().toLocaleDateString() );
   const [ accountId, setAccountId ] = useState( '' );
-  const [ type, setType ] = useState( '' );
+  const [ categoryType, setCategoryType ] = useState( '' );
   const [ note, setNote ] = useState( '' );
 
   useEffect( () => {
@@ -25,7 +25,7 @@ export function Create() {
     if ( userFromDb ) {
       console.log( `userFromDb ${ userFromDb._id! }` );
       getBudgets( userFromDb?._id! ).then( ( budget ) => {
-        setRows( budget );
+        setData( budget );
       } );
     }
   }
@@ -35,7 +35,7 @@ export function Create() {
       category: category,
       amount: amount,
       date: date,
-      type: type,
+      categoryType: categoryType,
       accountId: accountId,
       note: note,
     };
@@ -55,9 +55,7 @@ export function Create() {
     const bodyFormData = new FormData();
     e.preventDefault();
     if ( rows ) {
-      rows.forEach( ( row ) => {
-        addBudgets( row );
-      } );
+      addBudgets( rows );
     }
     console.log( `Form submitted, ${ userFromDb?._id }` );
   }
@@ -86,7 +84,7 @@ export function Create() {
               <tr>
                 <input type="hidden" name="account" id="account" value={ userFromDb?._id } onChange={ ( e ) => setAccountId( e.target.value ) } />
                 <td>
-                  <select className="type" onChange={ ( e ) => setType( e.target.value ) } >
+                  <select className="type" onChange={ ( e ) => setCategoryType( e.target.value ) } >
                     <option value="Income">Income</option>
                     <option value="Bill">Bill</option>
                     <option value="Expense">Expense</option>
@@ -95,8 +93,8 @@ export function Create() {
                 <td><input type="text" name="category" id="category" className="category"
                   placeholder="Income Category" value={ category } onChange={ ( e ) => setCategory( e.target.value ) } />
                 </td>
-                <td className="amtContainer"><>$</><input type="text" className="amount" name="amount" id="amount"
-                  placeholder="0.00" />
+                <td className="amtContainer"><>$</><input type="number" className="amount" name="amount" id="amount"
+                  placeholder="0.00" value={ amount } />
                 </td>
                 <td><input type="date" name="date" id="date" className="date" value={ date } onChange={ ( e ) => setDate( e.target.value ) } /></td>
               </tr>
