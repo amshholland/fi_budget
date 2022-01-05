@@ -1,0 +1,68 @@
+.Create {
+    display: flex;
+    flex-direction: column;
+    width: 97vw;
+    align-self: center;
+}
+
+.budget {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 75%;
+    align-self: center;
+}
+
+.type {
+    width: fit-content;
+}
+
+.transaction {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px black solid;
+    margin: 2px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    min-width: max-content;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
+h2 {
+    font-size: 12pt;
+    text-align: center;
+}
+
+th {
+    font-size: 10pt;
+    align-self: flex-start;
+}
+
+tr {
+    align-items: baseline;
+}
+
+td {
+    align-items: baseline;
+}
+
+.amtContainer {
+    display: flex;
+}
+
+.amount {
+    width: 50px;
+}
+
+.date {
+    width: 125px;
+}
+
+.category {
+    width: 125px;
+}

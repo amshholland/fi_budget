@@ -8,11 +8,12 @@ from flask import request
 from playhouse.shortcuts import model_to_dict, dict_to_model
 from flask import session
 from flask import json
-from flask import url_for, abort, render_template, flash
+from flask import url_for, abort, render_template, flash, Response
 from functools import wraps
 from hashlib import md5
 from peewee import *
 from config import config
+
 
 params = config()
 SECRET_KEY = 'hin6bab8ge25*r=x&amp;+5$0kn=-#log$pt^#@vrqjld!^2ci@g*b'
@@ -75,19 +76,18 @@ def hello():
 
 @app.route("/add", methods=["GET", "POST"])
 def addBudget():
-
     data = request.get_json()
 
     if request.method == 'POST':
-        q = Budget.insert_many(data)
-        q.execute()
+        query = Budget.insert_many(data)
+        query.execute()
     return json_response({'success': 'budget found'}, 200)
 
 
-@app.route("/budget", methods=["GET", "POST"])
-def budget():
-    budget = Budget.select()
-    return json.dumps(model_to_dict(Budget, budget))
+@app.route("/budget/<accountId>", methods=["GET", "POST"])
+def budget(accountId):
+    query = list(Budget.select().where(Budget.accountId == accountId).dicts())
+    return json_response(query, 200)
 
 
 def json_response(payload, status=200):
