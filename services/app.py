@@ -5,6 +5,7 @@ from flask import Flask
 from flask import g
 from flask import redirect
 from flask import request
+from playhouse.shortcuts import model_to_dict, dict_to_model
 from flask import session
 from flask import json
 from flask import url_for, abort, render_template, flash
@@ -39,7 +40,7 @@ class Budget(BaseModel):
 
     def budgets():
         return (Budget
-                .select())
+                .selectAll())
 
 
 def create_tables():
@@ -76,35 +77,17 @@ def hello():
 def addBudget():
 
     data = request.get_json()
-    print(data)
-    if request.method == 'POST':
-      row1 = Budget(accountId="eMf8kHHMLUbilhlZAE8YzpWbzBj1",
-                    categoryType="bill",
-                    category="Consumers",
-                    amount=100)
-      row2 = Budget(accountId="eMf8kHHMLUbilhlZAE8YzpWbzBj1",
-                    categoryType="bill",
-                    category="Consumers",
-                    amount=100)
 
-      Budget.bulk_create([row1, row2]
-                         # accountId=data.get('accountId'),
-                         # categoryType=data.get('categoryType'),
-                         # category=data.get('category'),
-                         # amount=data.get('amount'),
-                         # date=datetime.datetime,
-                         # note=data.get('note')
-                         )
+    if request.method == 'POST':
+        q = Budget.insert_many(data)
+        q.execute()
     return json_response({'success': 'budget found'}, 200)
 
 
 @app.route("/budget", methods=["GET", "POST"])
 def budget():
     budget = Budget.select()
-    if budget:
-        return json_response(budget('data'))
-    else:
-        return json_response({'error': 'budget not found'}, 404)
+    return json.dumps(model_to_dict(Budget, budget))
 
 
 def json_response(payload, status=200):
