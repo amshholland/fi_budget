@@ -7,19 +7,10 @@ if ( !baseUrl ) {
   console.error( "REACT_APP_API_URL environment variable not set." );
 }
 
-export function addBudgets( row: Budget ): Promise<Budget> {
-  const budget: Budget =
-  {
-    accountId: row.accountId,
-    type: row.type,
-    category: row.category,
-    amount: row.amount,
-    date: row.date,
-    note: row.note
-  };
-  return axios.post( `${ baseUrl }/add`, budget ).then( res => res.data );
+export function addBudgets( rows: Budget[] ): Promise<Budget> {
+  return axios.post( `${ baseUrl }/add`, rows ).then( res => res.data );
 }
 
-export function getBudgets( accountId: string ): Promise<Budget[]> {
+export async function getBudgets( accountId: string ): Promise<Budget[]> {
   return axios.get( `${ baseUrl }/budget/${ accountId }` ).then( res => res.data );
 }

@@ -1,9 +1,9 @@
 export default interface Budget {
   transactionId?: string;
   accountId: string;
-  type: string;
+  categoryType: string;
   category: string;
-  amount: number;
+  amount: string;
   date: string;
   note: string;
 }

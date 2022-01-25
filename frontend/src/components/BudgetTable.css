@@ -1,15 +1,16 @@
-.Create {
+.BudgetTable {
     display: flex;
     flex-direction: column;
-    width: 97vw;
+    width: 95vw;
     align-self: center;
 }
 
-.budget {
+.ExistingBudgetData,
+.AddToBudget {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 75%;
+    width: 100vw;
     align-self: center;
 }
 
@@ -28,8 +29,9 @@
 .buttons {
     display: flex;
     flex-direction: row;
+    width: 100%;
     min-width: max-content;
-    justify-content: space-evenly;
+    justify-content: center;
     align-content: center;
 }
 
@@ -40,7 +42,6 @@ h2 {
 
 th {
     font-size: 10pt;
-    align-self: flex-start;
 }
 
 tr {

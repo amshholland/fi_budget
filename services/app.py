@@ -4,6 +4,7 @@ from werkzeug.exceptions import (HTTPException, InternalServerError,
 from flask import Flask
 from flask import g
 from flask import redirect
+from flask_cors import CORS
 from flask import request
 from playhouse.shortcuts import model_to_dict, dict_to_model
 from flask import session
@@ -20,6 +21,7 @@ SECRET_KEY = 'hin6bab8ge25*r=x&amp;+5$0kn=-#log$pt^#@vrqjld!^2ci@g*b'
 
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object(__name__)
 
 database = PostgresqlDatabase(**params)
@@ -86,8 +88,11 @@ def addBudget():
 
 @app.route("/budget/<accountId>", methods=["GET", "POST"])
 def budget(accountId):
+  try:
     query = list(Budget.select().where(Budget.accountId == accountId).dicts())
     return json_response(query, 200)
+  except:
+    return json_response({'fail': 'budget not found'}, 400)
 
 
 def json_response(payload, status=200):
