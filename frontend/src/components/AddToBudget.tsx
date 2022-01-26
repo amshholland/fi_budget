@@ -8,111 +8,99 @@ import { addBudgets } from '../service/Budget';
 
 export function AddToBudget() {
   const { userFromDb } = useContext( AuthContext );
-  const [ rows, setRows ] = useState<Budget[]>( [] );
-  const [ row, setRow ] = useState<Budget>( {
-    category: '',
-    amount: '',
-    date: '',
-    categoryType: '',
-    accountId: '',
-    note: ''
-  } );
-  const [ category, setCategory ] = useState( '' );
-  const [ amount, setAmount ] = useState( '' );
-  const [ date, setDate ] = useState( new Date().toLocaleDateString() );
-  const [ accountId, setAccountId ] = useState( '' );
-  const [ categoryType, setCategoryType ] = useState( '' );
-  const [ note, setNote ] = useState( '' );
-  const [ index, setIndex ] = useState( 0 );
-
-  const handleChange = () => {
-    setIndex( index );
-    setRow( {
-      ...row,
-      category: category,
-      amount: amount,
-      date: date,
-      accountId: accountId,
-      categoryType: categoryType,
-    } );
-    let newRow = [ ...rows, row ];
-    setRows( newRow );
-  };
-
+  const [ rows, setRows ] = useState( [ {} ] );
+  const columnNames = [ "Type", "Category", "Amount", "Date", "Note" ];
 
   const handleAddRow = () => {
-    setRow( {
-      category: '',
-      amount: '',
-      date: '',
-      categoryType: '',
-      accountId: '',
-      note: ''
-    } );
-    let addRow = [ ...rows, row ];
-    setRows( addRow );
+    const item = {};
+    setRows( [ ...rows, item ] );
   };
 
-  const handleRemoveRow = () => {
-    setRows( rows.slice( 0, -1 ) );
-  };
-
-  const handleRemoveSpecificRow = ( category: string ) => () => {
-    setRows( rows.splice( rows.findIndex( x => x.category === category ), 1 ) );
-  };
-
-  const handleSubmit = ( e: { preventDefault: () => void; } ) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     if ( rows ) {
       addBudgets( rows );
     }
     console.log( `Form submitted, ${ userFromDb?._id }` );
   };
 
+  const handleRemoveSpecificRow = ( idx: number ) => {
+    const tempRows = [ ...rows ];
+    tempRows.splice( idx, 1 );
+    setRows( tempRows );
+  };
+
+  const updateState = ( e ) => {
+    let column = e.target.attributes.column.value;
+    let index = e.target.attributes.index.value;
+    let value = e.target.value;
+
+    const tempRows = [ ...rows ]; // avoid direct state mutation
+    const tempObj = rows[ index ]; // copy state object at index to a temporary object
+    tempObj[ column ] = value; // modify temporary object
+
+    // return object to rows` clone
+    tempRows[ index ] = tempObj;
+    setRows( tempRows ); // update state
+  };
+
   return (
-    <div className="AddToBudget">
-      <form onSubmit={ handleSubmit } className="budget">
-        <tbody>
+    <div>
+      <div className="container">
+        <div className="row clearfix">
+          <div className="col-md-12 column">
+            <table className="table table-bordered table-hover" id="tab_logic">
+              <thead>
+                <tr>
+                  <th className="text-center"> # </th>
+                  { columnNames.map( ( column, index ) => (
+                    <th className="text-center" key={ index }>
+                      { column }
+                    </th>
+                  ) ) }
+                  <th />
+                </tr>
+              </thead>
+              <tbody>
+                { rows.map( ( item, idx ) => (
+                  <tr key={ idx }>
+                    <td>{ idx + 1 }</td>
+                    { columnNames.map( ( column, index ) => (
+                      <td key={ index }>
+                        <input
+                          type="text"
+                          column={ column }
+                          value={ rows[ idx ][ column ] }
+                          index={ idx }
+                          className="form-control"
+                          onChange={ ( e ) => updateState( e ) }
+                        />
+                      </td>
+                    ) ) }
 
-          { rows.map( ( row, index ) => (
-            <tr key={ index }>
-              <input type="hidden" name="account" id="account" value={ userFromDb?._id } onChange={ ( e ) => setAccountId( e.target.value ) } />
-              <td>
-                <select className="type" onChange={ ( e ) => setCategoryType( e.target.value ) } >
-                  <option value="Income">Income</option>
-                  <option value="Bill">Bill</option>
-                  <option value="Expense">Expense</option>
-                </select>
-              </td>
-              <td><input type="text" name="category" id="category" className="category"
-                placeholder="Income Category" value={ category } onChange={ ( e ) => setCategory( e.target.value ) } />
-              </td>
-              <td className="amtContainer"><>$</><input type="number" className="amount" name="amount" id="amount"
-                placeholder="0.00" value={ amount } onChange={ ( e ) => setAmount( e.target.value ) } />
-              </td>
-              <td><input type="date" name="date" id="date" className="date" value={ date } onChange={ ( e ) => setDate( e.target.value ) } /></td>
-              <td>
-                <button
-                  className="btn btn-outline-danger btn-sm"
-                  onClick={ handleRemoveSpecificRow( category ) }
-                >
-                  Remove
-                </button>
-              </td>
-            </tr>
-          ) ) }
-        </tbody>
-        <div className="buttons">
-          <button onClick={ handleAddRow } >
-            Add Row
-          </button>
-          <button onClick={ handleRemoveRow }>
-            Delete Last Row
-          </button>
+                    <td>
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={ () => handleRemoveSpecificRow( idx ) }
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ) ) }
+              </tbody>
+            </table>
+            <button onClick={ handleAddRow } className="btn btn-primary">
+              Add Row
+            </button>
+            <button
+              onClick={ handleSubmit }
+              className="btn btn-success float-right"
+            >
+              Save Results
+            </button>
+          </div>
         </div>
-      </form>
-      <button type="submit">Submit</button>
-
-    </div >
+      </div>
+    </div>
   );
 };
