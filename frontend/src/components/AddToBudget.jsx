@@ -22,7 +22,6 @@ export function AddToBudget() {
       throw new Error( 'Invalid request' );
     }
     addBudgets( rows );
-    console.log( rows );
     console.log( `Form submitted, ${ userFromDb?._id }` );
   };
 
@@ -42,7 +41,6 @@ export function AddToBudget() {
     let value = e.target.value;
 
     const tempRows = [ ...rows ]; // avoid direct state mutation
-    console.log( `tempRows: ${ tempRows }` );
     const tempObj = rows[ index ]; // copy state object at index to a temporary object
     tempObj[ column ] = value; // modify temporary object
 
@@ -55,27 +53,10 @@ export function AddToBudget() {
     <div>
       { rows.map( ( item, idx ) => (
         <tr key={ idx }>
-          <input type="hidden" name="account" id="account" value={ rows[ idx ][ fieldNames[ 0 ] ] } onChange={ ( e ) => setAccountId( userFromDb?._id ) } />
-          {/* <td>
-                      <select className="type" onChange={ ( e ) => updateState( e.target.value ) } >
-                        <option value="Income">Income</option>
-                        <option value="Bill">Bill</option>
-                        <option value="Expense">Expense</option>
-                      </select>
-                    </td>
-                    <td><input type="text" name="category" id="category" className="category"
-                      placeholder="Income Category" value={ rows[ idx ][ fieldNames[ 1 ] ] } onChange={ ( e ) => setCategory( e.target.value ) } />
-                    </td>
-                    <td className="amtContainer"><>$</><input type="number" className="amount" name="amount" id="amount"
-                      placeholder="0.00" value={ rows[ idx ][ fieldNames[ 3 ] ] } onChange={ ( e ) => setAmount( e.target.value ) } />
-                    </td>
-                    <td><input type="date" name="date" id="date" className="date" value={ rows[ idx ][ fieldNames[ 4 ] ] } onChange={ ( e ) => setDate( e.target.value ) } /></td>
-                    <td><input type="note" name="note" id="note" className="note" value={ rows[ idx ][ fieldNames[ 5 ] ] } onChange={ ( e ) => setNote( e.target.value ) } /></td> */}
-
           { fieldNames.map( ( column, index ) => (
             <td key={ index }>
               <input
-                type="text"
+                type={ inputTypes[ index ] }
                 column={ column }
                 value={ rows[ idx ][ column ] }
                 index={ idx }

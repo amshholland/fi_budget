@@ -38,7 +38,7 @@ class Budget(BaseModel):
     categoryType = CharField()
     category = CharField()
     amount = FloatField()
-    date = DateTimeField(null=True)
+    date = DateField(null=True)
     note = CharField(null=True)
 
     def budgets():

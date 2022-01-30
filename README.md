@@ -5,6 +5,8 @@
 ### cd into frontend directory
 ### `npm start`
 
+## TEST FRONTEND
+### `npm test`
 
 # FUNCTIONS
 

@@ -7,7 +7,7 @@ if ( !baseUrl ) {
   console.error( "REACT_APP_API_URL environment variable not set." );
 }
 
-export function addBudgets( rows: Budget[] ): Promise<Budget> {
+export function addBudgets( rows: any ): Promise<Budget> {
   return axios.post( `${ baseUrl }/add`, rows ).then( res => res.data );
 }
 

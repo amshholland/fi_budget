@@ -2,32 +2,23 @@ import './BudgetTable.css';
 
 import { AddToBudget } from './AddToBudget';
 import { ExistingBudgetData } from './ExistingBudgetData';
+import { TableHeader } from './TableHeader';
 
 export function BudgetTable() {
+
   return (
-    <div className="BudgetTable">
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Category</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Date</th>
-          </tr>
-        </thead>
-        <ExistingBudgetData />
+    <div className="container">
+      <div className="row clearfix">
+        <div className="col-md-12 column">
+          <table className="table table-bordered table-hover" id="tab_logic">
+            <TableHeader />
+            <tbody>
+              <ExistingBudgetData />
+              <AddToBudget />
+            </tbody>
       </table>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Category</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Date</th>
-          </tr>
-        </thead>
-        <AddToBudget />
-      </table>
+        </div>
+      </div>
     </div>
   );
 };;

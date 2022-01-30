@@ -8,8 +8,9 @@ import Budget from '../model/budget';
 
 export function ExistingBudgetData() {
   const { userFromDb } = useContext( AuthContext );
-  const [ data, setData ] = useState<Budget[]>( [] );
+  const [ rows, setRows ] = useState( [] );
   const [ dataLoaded, setDataLoaded ] = useState( false );
+  const fieldNames = [ "accountId", "categoryType", "category", "amount", "date", "note" ];
 
   useEffect( () => {
     loadBudgetData();
@@ -17,33 +18,33 @@ export function ExistingBudgetData() {
 
   function loadBudgetData() {
     if ( userFromDb ) {
-      getBudgets( userFromDb?._id! ).then( ( budget ) => {
-        setData( budget );
+      getBudgets( userFromDb?._id ).then( ( budget ) => {
+        setRows( budget );
         setDataLoaded( true );
       } );
     }
   }
 
   return (
-    <div className="ExistingBudgetData">
+    <div>
       <tbody>
         { !dataLoaded ? (
           <p id="loading">Loading...</p>
-        ) : data.length === 0 ? (
+        ) : rows.length === 0 ? (
           <p>Create Your Budget Below</p>
         ) : (
           <>
-            { data.map( ( row, index ) => (
-              <tr>
-                <td className="categoryType"> { row.categoryType } </td>
-                <td className="category">{ row.category }</td>
-                <td className="amount">{ row.amount } </td>
-                <td className="date">{ row.date }</td>
+            { rows.map( ( column, idx ) => (
+              <tr key={ idx } >
+                { fieldNames.map( ( column, index ) => (
+                  <td key={ index }>
+                    { rows[ idx ][ column ] }
+                  </td>
+                ) ) }
               </tr>
             ) ) }
           </>
-        )
-        }
+        ) }
       </tbody>
     </div>
   );
