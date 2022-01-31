@@ -8,7 +8,6 @@ import { addBudgets } from '../service/Budget';
 export function AddToBudget() {
   const { userFromDb } = useContext( AuthContext );
   const [ rows, setRows ] = useState( [ {} ] );
-  const [ row, setRow ] = useState( {} );
   const fieldNames = [ "categoryType", "category", "amount", "date", "note" ];
   const inputTypes = [ "text", "text", "number", "date", "text" ];
 
