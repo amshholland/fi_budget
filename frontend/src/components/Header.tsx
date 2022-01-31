@@ -36,34 +36,16 @@ function Header() {
                 <img src={ user.photoURL } alt="google avatar" id="profilePic" />
               ) }
             </div>
-            { user && (
-                <div className="loggedInHeader" >
-                    <div className="googleUser">
-                        <div className="userPhoto" onClick={ () => signOutDisplay() }>
-                            { !!user.photoURL && <img src={ user.photoURL } alt="google avatar" id="profilePic" /> }
-                        </div>
-                        <div className="nav" style={ { display: signOutToggle } }>
-                            <ul>
-                                <li><Link to="/create">Create</Link></li>
-                                <li><Link to="/customize">Customize</Link></li>
-                                <li><Link to="/goals">Goals</Link></li>
-                                <li><Link to="/net-worth">Net Worth</Link></li>
-                                <li><Link to="/transactions">Transactions</Link></li>
-                                <button className="navButton" id="signOut" onClick={ signOut }>
-                                    Sign out
-                                </button>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            ) }
-
-            <div className="googleAuth">
-                { !user && (
-                    <button className="navButton" onClick={ signInWithGoogle }>
-                        Sign in
-                    </button>
-                ) }
+            <div className="nav" style={ { display: signOutToggle } }>
+              <ul>
+                <li><Link to="/budget">Budget</Link></li>
+                <li><Link to="/goals">Goals</Link></li>
+                <li><Link to="/net-worth">Net Worth</Link></li>
+                <li><Link to="/transactions">Transactions</Link></li>
+                <button className="headerButton" id="signOut" onClick={ signOut }>
+                  Sign out
+                </button>
+              </ul>
             </div>
           </div>
         </div>
