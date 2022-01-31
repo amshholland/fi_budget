@@ -3,14 +3,14 @@ import './BudgetTable.css';
 import { ChangeEvent, useContext, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
-import Budget from '../model/budget';
 import { addBudgets } from '../service/Budget';
 
 export function AddToBudget() {
   const { userFromDb } = useContext( AuthContext );
   const [ rows, setRows ] = useState( [ {} ] );
-  const fieldNames = [ "accountId", "categoryType", "category", "amount", "date", "note" ];
-  const inputTypes = [ "text", "text", "text", "number", "date", "text" ];
+  const [ row, setRow ] = useState( {} );
+  const fieldNames = [ "categoryType", "category", "amount", "date", "note" ];
+  const inputTypes = [ "text", "text", "number", "date", "text" ];
 
   const handleAddRow = () => {
     const item = {};
@@ -40,14 +40,18 @@ export function AddToBudget() {
     let index = e.target.attributes.index.value;
     let value = e.target.value;
 
-    const tempRows = [ ...rows ]; // avoid direct state mutation
-    const tempObj = rows[ index ]; // copy state object at index to a temporary object
-    tempObj[ column ] = value; // modify temporary object
+    const tempRows = [ ...rows ];
+    let tempObj = {};
+    Object.assign( tempObj, { "accountId": userFromDb?._id } );
+    Object.assign( tempObj, rows[ index ] );
 
-    // return object to rows` clone
+    tempObj[ column ] = value;
+
     tempRows[ index ] = tempObj;
-    setRows( tempRows ); // update state
+    setRows( tempRows );
+    console.log( rows )
   };
+
 
   return (
     <div>
