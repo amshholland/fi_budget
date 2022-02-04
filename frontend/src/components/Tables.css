@@ -1,17 +1,9 @@
-.BudgetTable {
-    display: flex;
-    flex-direction: column;
-    width: 95vw;
-    align-self: center;
-}
-
 .ExistingBudgetData,
 .AddToBudget {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100vw;
-    align-self: center;
+    width: 75vw;
+    margin-top: 12%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .categoryType {
@@ -33,6 +25,13 @@
     min-width: max-content;
     justify-content: center;
     align-content: center;
+}
+
+.hiddenButton {
+    padding-left: 3px;
+    padding-right: 3px;
+    background: none;
+    border: none;
 }
 
 h2 {
@@ -66,4 +65,9 @@ td {
 
 .category {
     width: 125px;
+}
+
+.editIcon,
+.deleteIcon {
+    height: 18px;
 }

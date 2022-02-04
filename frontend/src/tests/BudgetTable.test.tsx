@@ -1,14 +1,12 @@
 import { render, screen } from '@testing-library/react';
 
+import { AddToBudget } from '../components/AddToBudget';
 import { BudgetTable } from '../components/BudgetTable';
-import { TableHeader } from '../components/TableHeader';
 
-describe( 'Budget Table', () => {
-  it( ' should exist', () => {
-    render( <BudgetTable /> );
-    expect( TableHeader ).toBeVisible();
+describe( "Budget Table", function () {
+  render( <BudgetTable /> );
+  test( 'should exist', () => {
+    const budgetTable = screen.queryByTestId( /BudgetTable/i );
+    expect( budgetTable ).toBeInTheDocument();
   } );
-  // it( 'should contain existing data if existing data', () => {
-
-  // } );
 } );

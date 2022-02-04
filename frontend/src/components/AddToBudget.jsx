@@ -1,4 +1,4 @@
-import './BudgetTable.css';
+import './Tables.css';
 
 import { ChangeEvent, useContext, useState } from 'react';
 
@@ -10,6 +10,7 @@ export function AddToBudget() {
   const [ rows, setRows ] = useState( [ {} ] );
   const fieldNames = [ "categoryType", "category", "amount", "date", "note" ];
   const inputTypes = [ "text", "text", "number", "date", "text" ];
+  const columnLabels = [ "Type", "Category", "Amount", "Date" ];
 
   const handleAddRow = () => {
     const item = {};
@@ -53,7 +54,18 @@ export function AddToBudget() {
 
 
   return (
-    <div>
+    <table className="EditBudget">
+      <thead >
+        <tr>
+          { columnLabels.map( ( column, index ) => (
+            <th className="text-center" key={ index }>
+              { column }
+            </th>
+          ) ) }
+          <th />
+        </tr>
+      </thead>
+      <tbody className='AddToBudget'>
       { rows.map( ( item, idx ) => (
         <tr key={ idx }>
           { fieldNames.map( ( column, index ) => (
@@ -78,15 +90,19 @@ export function AddToBudget() {
           </td>
         </tr>
       ) ) }
-      <button onClick={ handleAddRow } className="btn btn-primary">
+        <tr>
+          <td>
+            <button onClick={ handleAddRow } className="btn btn-primary" name="submit" alt="Submit Button">
         Add Row
-      </button>
-      <button
-        onClick={ handleSubmit }
-        className="btn btn-success float-right"
-      >
+            </button>
+          </td>
+          <td>
+            <button onClick={ handleSubmit } className="btn btn-success float-right">
         Save Results
-      </button>
-    </div >
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 };

@@ -1,16 +1,22 @@
-import './BudgetTable.css';
+import './Tables.css';
 
-import { addBudgets, getBudgets } from '../service/Budget';
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
-import Budget from '../model/budget';
+import { EditRowModal } from './EditRowModal';
+import { Modal } from "react-bootstrap";
+import { getBudgets } from '../service/Budget';
 
 export function ExistingBudgetData() {
   const { userFromDb } = useContext( AuthContext );
   const [ rows, setRows ] = useState( [] );
   const [ dataLoaded, setDataLoaded ] = useState( false );
-  const fieldNames = [ "accountId", "categoryType", "category", "amount", "date", "note" ];
+  const [ editableRow, setEditableRow ] = useState( null );
+
+  const openModal = ( row ) => setEditableRow( row );
+  const closeModal = () => setEditableRow( null );
+
+  const rowLabels = [ "Type", "Category", "Amount", "Date", "", "" ];
 
   useEffect( () => {
     loadBudgetData();
@@ -26,26 +32,48 @@ export function ExistingBudgetData() {
   }
 
   return (
-    <div>
-      <tbody>
-        { !dataLoaded ? (
-          <p id="loading">Loading...</p>
-        ) : rows.length === 0 ? (
-          <p>Create Your Budget Below</p>
+    <table className="ExistingBudgetData">
+      { !dataLoaded ? (
+        <td id="loading">Loading...</td>
+      ) : rows.length === 0 ? (
+          <td>Create Your Budget Below</td>
         ) : (
           <>
-            { rows.map( ( column, idx ) => (
-              <tr key={ idx } >
-                { fieldNames.map( ( column, index ) => (
-                  <td key={ index }>
-                    { rows[ idx ][ column ] }
-                  </td>
-                ) ) }
+              <thead className="TableHeader">
+                <tr>
+                  { rowLabels.map( ( row, index ) => (
+                    <th className="text-center" key={ index }>
+                      { row }
+                    </th>
+                  ) ) }
+                  <th />
+                </tr>
+              </thead>
+              <tbody className='ExistingBudgetData'>
+                { rows.map( ( row, idx ) => (
+                  <tr key={ idx }>
+                    <td>{ row.categoryType }</td>
+                    <td>{ row.category }</td>
+                    <td>{ row.amount }</td>
+                    <td>{ row.date }</td>
+                    <button className='hiddenButton' onClick={ () => openModal( row ) }>
+                      <img className="editIcon" src={ process.env.PUBLIC_URL + '/edit_icon.png' } />
+                    </button>
+                    <button className='hiddenButton'><img className="deleteIcon" src={ process.env.PUBLIC_URL + '/delete_icon.png' } /></button>
               </tr>
-            ) ) }
-          </>
-        ) }
-      </tbody>
-    </div>
+                ) ) }
+                <Modal
+                  show={ editableRow !== null }
+                  className="mymodal"
+                  centered
+                >
+                  { editableRow !== null && (
+                    <EditRowModal row={ editableRow } handleClose={ closeModal } />
+                  ) }
+                </Modal>
+              </tbody>
+        </>
+      ) }
+    </table>
   );
 };

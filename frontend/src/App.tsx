@@ -2,8 +2,10 @@ import './App.css';
 
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
+import { AddToBudget } from './components/AddToBudget';
 import { BudgetTable } from './components/BudgetTable';
 import { Customize } from './components/Customize';
+import { ExistingBudgetData } from './components/ExistingBudgetData';
 import { Goals } from './components/Goals';
 import Header from './components/Header';
 import { NetWorth } from './components/NetWorth';
@@ -16,7 +18,8 @@ function App() {
         <Header />
         <Switch>
           <Route path="/budget">
-            <BudgetTable />
+            <ExistingBudgetData />
+            <AddToBudget />
           </Route>
           <Route path="/goals">
             <Goals />
