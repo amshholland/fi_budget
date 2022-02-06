@@ -101,10 +101,7 @@ def transaction(transactionId):
   try:
     query = list((Budget.select().where(
         Budget.transactionId == transactionId)).dicts())
-    if (len(query) != 0):
-      return json_response(query, 200)
-    else:
-      return json_response({'fail': transactionId}, 400)
+    return json_response(query, 200)
   except:
     return json_response({'fail': transactionId}, 400)
 
@@ -112,8 +109,9 @@ def transaction(transactionId):
 @app.route("/budget/delete/<transactionId>")
 def deleteTransaction(transactionId):
   try:
-    query = Budget.delete().where(Budget.transactionId == transactionId)
-    return json_response(query, 200)
+    query = Budget.get(Budget.transactionId == transactionId)
+    query.delete_instance()
+    return json_response('deleted', 200)
   except:
     return json_response({'fail': 'budget not found'}, 400)
 
