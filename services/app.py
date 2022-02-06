@@ -71,12 +71,12 @@ def after_request(response):
     return response
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def hello():
     return "Welcome to Python Flask."
 
 
-@app.route("/add", methods=["GET", "POST"])
+@app.route("/add")
 def addBudget():
     data = request.get_json()
 
@@ -86,14 +86,46 @@ def addBudget():
     return json_response({'success': 'budget found'}, 200)
 
 
-@app.route("/budget/<accountId>", methods=["GET", "POST"])
+@app.route("/budget/<accountId>")
 def budget(accountId):
   try:
-    query = list(Budget.select().where(Budget.accountId == accountId).dicts())
+    query = list((Budget.select().where(
+        Budget.accountId == accountId)).dicts())
     return json_response(query, 200)
   except:
     return json_response({'fail': 'budget not found'}, 400)
 
+
+@app.route("/budget/transaction/<transactionId>")
+def transaction(transactionId):
+  try:
+    query = list((Budget.select().where(
+        Budget.transactionId == transactionId)).dicts())
+    if (len(query) != 0):
+      return json_response(query, 200)
+    else:
+      return json_response({'fail': transactionId}, 400)
+  except:
+    return json_response({'fail': transactionId}, 400)
+
+
+@app.route("/budget/delete/<transactionId>")
+def deleteTransaction(transactionId):
+  try:
+    query = Budget.delete().where(Budget.transactionId == transactionId)
+    return json_response(query, 200)
+  except:
+    return json_response({'fail': 'budget not found'}, 400)
+
+
+@app.route("/budget/<accountId>/summary", methods=["GET", "POST"])
+def monthTotal(accountId):
+  try:
+    bills = Budget.select(fn.SUM(Budget.amount)).where(
+        Budget.categoryType == "bill")
+    return json_response(bills, 200)
+  except:
+    return json_response({'fail': accountId}, 400)
 
 def json_response(payload, status=200):
     return (json.dumps(payload), status, {'content-categoryType': 'application/json'})
