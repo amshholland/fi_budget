@@ -12,7 +12,7 @@ export const handleDelete = ( transactionId: number ) => {
   console.log( `Row deleted` );
 };
 
-export const bulkDeleteBudgetLineItems = ( transactionIds: [] ) => {
+export const bulkDeleteBudgetLineItems = ( transactionIds: number[] ) => {
   transactionIds.forEach( transactionId => {
     deleteBudgetItem( transactionId );
   } );
