@@ -116,6 +116,16 @@ def deleteTransaction(transactionId):
     return json_response({'fail': 'budget not found'}, 400)
 
 
+@app.route("/budget/edit/<transactionId>")
+def editBudgetLineItem(row):
+  print(row)
+  try:
+    query = Budget.get(Budget.transactionId == transactionId)
+    query.save(row)
+    return json_response('updated', 200)
+  except:
+    return json_response({'fail': 'budget not updated'}, 400)
+
 @app.route("/budget/<accountId>/summary", methods=["GET", "POST"])
 def monthTotal(accountId):
   try:

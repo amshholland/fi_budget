@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "type": "pwa-chrome",
+      "name": "http://\"transactionId\"",
+      "request": "launch",
+      "url": "http://\"transactionId\""
+    }
+  ]
+}

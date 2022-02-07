@@ -3,8 +3,10 @@ import './Tables.css';
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
+import { DeleteRowModal } from './DeleteRowModal';
 import { EditRowModal } from './EditRowModal';
 import { Modal } from "react-bootstrap";
+import { bulkDeleteBudgetLineItems } from '../utils/EditBudget';
 import { getBudgets } from '../service/Budget';
 
 export function ExistingBudgetData() {
@@ -12,9 +14,16 @@ export function ExistingBudgetData() {
   const [ rows, setRows ] = useState( [] );
   const [ dataLoaded, setDataLoaded ] = useState( false );
   const [ editableRow, setEditableRow ] = useState( null );
+  const [ deleteRow, setDeleteRow ] = useState( null );
+  const [ deleteRows, setDeleteRows ] = useState( [] )
 
-  const openModal = ( row ) => setEditableRow( row );
-  const closeModal = () => setEditableRow( null );
+  const openEditModal = ( row ) => setEditableRow( row );
+  const closeEditModal = () => setEditableRow( null );
+
+  const openConfirmDeletionModal = ( row ) => setDeleteRow( row );
+  const closeConfirmDeletionModal = () => setDeleteRow( null );
+
+  const closeBulkDeletionModal = () => setDeleteRows( null );
 
   const rowLabels = [ "Type", "Category", "Amount", "Date", "", "" ];
 
@@ -31,12 +40,19 @@ export function ExistingBudgetData() {
     }
   }
 
+  const handleAddForBulkDelete = ( transactionId ) => {
+    const tempDeleteRows = [ ...deleteRows ];
+    tempDeleteRows.push( transactionId );
+    console.log( tempDeleteRows );
+    setDeleteRows( tempDeleteRows );
+  }
+
   return (
     <table className="ExistingBudgetData">
       { !dataLoaded ? (
-        <td id="loading">Loading...</td>
+        <tr><td id="loading">Loading...</td></tr>
       ) : rows.length === 0 ? (
-          <td>Create Your Budget Below</td>
+          <tr><td>Create Your Budget Below</td></tr>
         ) : (
           <>
               <thead className="TableHeader">
@@ -52,14 +68,15 @@ export function ExistingBudgetData() {
               <tbody className='ExistingBudgetData'>
                 { rows.map( ( row, idx ) => (
                   <tr key={ idx }>
+                    <td><input type="checkbox" value={ row.transactionId } onClick={ () => handleAddForBulkDelete( row.transactionId ) } /></td>
                     <td>{ row.categoryType }</td>
                     <td>{ row.category }</td>
                     <td>{ row.amount }</td>
                     <td>{ row.date }</td>
-                    <button className='hiddenButton' onClick={ () => openModal( row ) }>
+                    <td><button className='hiddenButton' onClick={ () => openEditModal( row ) }>
                       <img className="editIcon" src={ process.env.PUBLIC_URL + '/edit_icon.png' } />
                     </button>
-                    <button className='hiddenButton'><img className="deleteIcon" src={ process.env.PUBLIC_URL + '/delete_icon.png' } /></button>
+                      <button className='hiddenButton' onClick={ () => openConfirmDeletionModal( row ) } > <img className="deleteIcon" src={ process.env.PUBLIC_URL + '/delete_icon.png' } /></button></td>
               </tr>
                 ) ) }
                 <Modal
@@ -68,12 +85,25 @@ export function ExistingBudgetData() {
                   centered
                 >
                   { editableRow !== null && (
-                    <EditRowModal row={ editableRow } handleClose={ closeModal } />
+                    <EditRowModal row={ editableRow } handleClose={ closeEditModal } />
                   ) }
+                </Modal>
+                <Modal
+                  show={ deleteRow !== null }
+                  className="mymodal"
+                  centered
+                >
+                  { deleteRow !== null && (
+                    <DeleteRowModal row={ deleteRow } handleClose={ closeConfirmDeletionModal } />
+                  ) }
+                </Modal>
+                <Modal show={ deleteRows.length !== 0 } className="bulkDeleteModal">
+                  <button className='hiddenButton' onClick={ () => bulkDeleteBudgetLineItems( deleteRows ) }><img className='deleteIcon' src={ process.env.PUBLIC_URL + '/delete_icon.png' } /></button>
                 </Modal>
               </tbody>
         </>
-      ) }
-    </table>
+      )
+      }
+    </table >
   );
 };

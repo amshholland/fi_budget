@@ -3,7 +3,7 @@ import './Tables.css';
 import { ChangeEvent, useContext, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
-import { addBudgets } from '../service/Budget';
+import { handleAddNewBudget } from '../utils/EditBudget';
 
 export function AddToBudget() {
   const { userFromDb } = useContext( AuthContext );
@@ -15,14 +15,6 @@ export function AddToBudget() {
   const handleAddRow = () => {
     const item = {};
     setRows( [ ...rows, item ] );
-  };
-
-  const handleSubmit = () => {
-    if ( !validateRowData ) {
-      throw new Error( 'Invalid request' );
-    }
-    addBudgets( rows );
-    console.log( `Form submitted, ${ userFromDb?._id }` );
   };
 
   const handleRemoveSpecificRow = ( idx ) => {
@@ -97,7 +89,7 @@ export function AddToBudget() {
             </button>
           </td>
           <td>
-            <button onClick={ handleSubmit } className="btn btn-success float-right">
+            <button onClick={ handleAddNewBudget } className="btn btn-success float-right">
         Save Results
             </button>
           </td>
