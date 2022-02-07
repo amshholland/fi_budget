@@ -1,6 +1,6 @@
 import './BudgetTable.css';
 
-import { AddToBudget } from './AddToBudget';
+import { EditBudget } from './EditBudget';
 import { ExistingBudgetData } from './ExistingBudgetData';
 
 export function BudgetTable() {
@@ -11,7 +11,7 @@ export function BudgetTable() {
         <div className="col-md-12 column">
           <table className="table table-bordered table-hover" id="tab_logic">
             <ExistingBudgetData />
-            <AddToBudget />
+            <EditBudget />
       </table>
         </div>
       </div>

@@ -5,12 +5,12 @@ import { ChangeEvent, useContext, useState } from 'react';
 import { AuthContext } from "../context/auth-context";
 import { handleAddNewBudget } from '../utils/EditBudget';
 
-export function AddToBudget() {
+export function EditBudget() {
   const { userFromDb } = useContext( AuthContext );
   const [ rows, setRows ] = useState( [ {} ] );
-  const fieldNames = [ "categoryType", "category", "amount", "date", "note" ];
-  const inputTypes = [ "text", "text", "number", "date", "text" ];
-  const columnLabels = [ "Type", "Category", "Amount", "Date" ];
+  const fieldNames = [ "categoryType", "category", "amount", "date" ];
+  const inputTypes = [ "text", "text", "number", "date" ];
+  const columnLabels = [ "Type", "Category", "Amount", "Date", "" ];
 
   const handleAddRow = () => {
     const item = {};
@@ -41,7 +41,7 @@ export function AddToBudget() {
 
     tempRows[ index ] = tempObj;
     setRows( tempRows );
-    console.log( rows )
+    console.log( rows );
   };
 
 
@@ -58,39 +58,39 @@ export function AddToBudget() {
         </tr>
       </thead>
       <tbody className='AddToBudget'>
-      { rows.map( ( item, idx ) => (
-        <tr key={ idx }>
-          { fieldNames.map( ( column, index ) => (
-            <td key={ index }>
-              <input
-                type={ inputTypes[ index ] }
-                column={ column }
-                value={ rows[ idx ][ column ] }
-                index={ idx }
-                className="form-control"
-                onChange={ ( e ) => updateState( e ) }
-              />
+        { rows.map( ( item, idx ) => (
+          <tr key={ idx }>
+            { fieldNames.map( ( column, index ) => (
+              <td key={ index }>
+                <input
+                  type={ inputTypes[ index ] }
+                  column={ column }
+                  value={ rows[ idx ][ column ] }
+                  index={ idx }
+                  className="form-control"
+                  onChange={ ( e ) => updateState( e ) }
+                />
+              </td>
+            ) ) }
+            <td>
+              <button
+                className="btn btn-outline-danger btn-sm"
+                onClick={ () => handleRemoveSpecificRow( idx ) }
+              >
+                Remove
+              </button>
             </td>
-          ) ) }
-          <td>
-            <button
-              className="btn btn-outline-danger btn-sm"
-              onClick={ () => handleRemoveSpecificRow( idx ) }
-            >
-              Remove
-            </button>
-          </td>
-        </tr>
-      ) ) }
+          </tr>
+        ) ) }
         <tr>
           <td>
             <button onClick={ handleAddRow } className="btn btn-primary" name="submit" alt="Submit Button">
-        Add Row
+              Add Row
             </button>
           </td>
           <td>
             <button onClick={ handleAddNewBudget } className="btn btn-success float-right">
-        Save Results
+              Save Results
             </button>
           </td>
         </tr>
