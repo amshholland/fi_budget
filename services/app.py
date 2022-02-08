@@ -33,13 +33,12 @@ class BaseModel(Model):
 
 
 class Budget(BaseModel):
-    transactionId = AutoField(null=True)
+    budgetId = AutoField(null=True)
     accountId = CharField()
     categoryType = CharField()
     category = CharField()
     amount = FloatField()
     date = DateField(null=True)
-    note = CharField(null=True)
 
     def budgets():
         return (Budget
@@ -96,31 +95,31 @@ def budget(accountId):
     return json_response({'fail': 'budget not found'}, 400)
 
 
-@app.route("/budget/transaction/<transactionId>")
-def transaction(transactionId):
+@app.route("/budget/transaction/<budgetId>")
+def transaction(budgetId):
   try:
     query = list((Budget.select().where(
-        Budget.transactionId == transactionId)).dicts())
+        Budget.budgetId == budgetId)).dicts())
     return json_response(query, 200)
   except:
-    return json_response({'fail': transactionId}, 400)
+    return json_response({'fail': budgetId}, 400)
 
 
-@app.route("/budget/delete/<transactionId>")
-def deleteTransaction(transactionId):
+@app.route("/budget/delete/<budgetId>")
+def deleteTransaction(budgetId):
   try:
-    query = Budget.get(Budget.transactionId == transactionId)
+    query = Budget.get(Budget.budgetId == budgetId)
     query.delete_instance()
     return json_response('deleted', 200)
   except:
     return json_response({'fail': 'budget not found'}, 400)
 
 
-@app.route("/budget/edit/<transactionId>")
+@app.route("/budget/edit/<budgetId>")
 def editBudgetLineItem(row):
   print(row)
   try:
-    query = Budget.get(Budget.transactionId == transactionId)
+    query = Budget.get(Budget.budgetId == budgetId)
     query.save(row)
     return json_response('updated', 200)
   except:

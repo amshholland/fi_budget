@@ -3,6 +3,7 @@ import './Tables.css';
 import { ChangeEvent, useContext, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
+import { TableHeader } from './Table/TableHeader'
 import { handleAddNewBudget } from '../utils/EditBudget';
 
 export function EditBudget() {
@@ -47,16 +48,7 @@ export function EditBudget() {
 
   return (
     <table className="EditBudget">
-      <thead >
-        <tr>
-          { columnLabels.map( ( column, index ) => (
-            <th className="text-center" key={ index }>
-              { column }
-            </th>
-          ) ) }
-          <th />
-        </tr>
-      </thead>
+      <TableHeader headerLabels={ columnLabels } />
       <tbody className='AddToBudget'>
         { rows.map( ( item, idx ) => (
           <tr key={ idx }>
