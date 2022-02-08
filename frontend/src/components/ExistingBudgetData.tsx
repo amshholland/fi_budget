@@ -21,7 +21,6 @@ export function ExistingBudgetData() {
   const openEditModal = ( row: Budget ) => setEditableRow( row );
   const closeEditModal = () => setEditableRow( null );
 
-  const openConfirmDeletionModal = ( row: Budget ) => setDeleteRow( row );
   const closeConfirmDeletionModal = () => setDeleteRow( null );
 
   const closeBulkDeletionModal = () => setDeleteRows( [] );
