@@ -60,7 +60,7 @@ export function Transactions() {
                                     <td className="currency"><input type="text" className="number" name="amount" id="amount"
                                         placeholder="0.00" />
                                     </td>
-                                    <td><input type="text" className="number" name="date" id="date" placeholder="yyyy-mm-dd" /></td>
+                    <td><input type="text" className="number" name="date" id="date" placeholder="MM-dd-yyy" /></td>
                                     <td><input type="button" id="in_add" value="+" />
                                     </td>
                                 </tr>

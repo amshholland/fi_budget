@@ -9,9 +9,7 @@ if ( !baseUrl ) {
 
 export async function getAccountByGoogleId( googleUser: firebase.User ): Promise<Account> {
     return axios.get( `${ baseUrl }/accounts/${ googleUser.uid }` ).then( res => res.data )
-        .catch( function ( error ) {
-            console.log( error );
-            console.log( "user does not exist" );
+      .catch( function () {
             createAccount( googleUser );
         } );
 }

@@ -23,10 +23,8 @@ export function AuthContextProvider( { children }: { children: ReactNode; } ) {
     useEffect( () => {
         return firebase.auth().onAuthStateChanged( newUser => {
             setUser( newUser );
-            if ( newUser !== null ) {
-                console.log( 'getting account id' );
-                getAccountByGoogleId( newUser! ).then( ( account ) => {
-                    console.log( account );
+          if ( newUser !== null ) {
+              getAccountByGoogleId( newUser! ).then( ( account ) => {
                     setUserFromDb( account );
                 } );;
             }

@@ -2,7 +2,6 @@ import './App.css';
 
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import { BudgetTable } from './components/BudgetTable';
 import { EditBudget } from './components/EditBudget';
 import { ExistingBudgetData } from './components/ExistingBudgetData';
 import { Goals } from './components/Goals';

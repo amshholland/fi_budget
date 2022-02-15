@@ -10,7 +10,8 @@ export async function getBudgets( accountId: string ): Promise<Budget[]> {
   return axios.get( `${ baseUrl }/budget/${ accountId }` ).then( res => res.data );
 }
 
-export function addBudgets( rows: any ): Promise<Budget> {
+export function addBudgets( rows: Budget[] ): Promise<Budget[]> {
+  console.log( `addBudget ${ rows }` )
   return axios.post( `${ baseUrl }/add`, rows ).then( res => res.data );
 }
 

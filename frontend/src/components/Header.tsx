@@ -8,7 +8,6 @@ import { AuthContext } from "../context/auth-context";
 
 function Header() {
   const { user } = useContext( AuthContext );
-  console.log( user );
   const [ signOutToggle, setSignOutToggle ] = useState( "none" );
 
   function signOutDisplay() {

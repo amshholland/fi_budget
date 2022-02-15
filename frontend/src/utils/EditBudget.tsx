@@ -2,7 +2,7 @@ import { addBudgets, deleteBudgetItem, editBudgetLineItem } from '../service/Bud
 
 import Budget from '../model/budget';
 
-export const handleAddNewBudget = ( rows: Budget ) => {
+export const handleAddNewBudget = ( rows: Budget[] ) => {
   addBudgets( rows );
   console.log( `Form submitted` );
 };
@@ -18,7 +18,7 @@ export const bulkDeleteBudgetLineItems = ( rows: Budget[] ) => {
   } );
 };
 
-export const editExistingBudgetLineItem = ( row: Budget ) => {
-  editBudgetLineItem( row );
-  console.log( `Row updated` );
-};
+// export const editExistingBudgetLineItem = ( row: Budget ) => {
+//   editBudgetLineItem( row );
+//   console.log( `Row updated` );
+// };

@@ -38,7 +38,7 @@ class Budget(BaseModel):
     categoryType = CharField()
     category = CharField()
     amount = FloatField()
-    date = DateField(null=True)
+    date = CharField()
 
     def budgets():
         return (Budget
@@ -75,7 +75,7 @@ def hello():
     return "Welcome to Python Flask."
 
 
-@app.route("/add")
+@app.route("/add", methods=["GET", "POST"])
 def addBudget():
     data = request.get_json()
 

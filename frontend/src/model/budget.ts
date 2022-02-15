@@ -3,7 +3,6 @@ export default interface Budget {
   accountId: string;
   categoryType: string;
   category: string;
-  amount: string;
+  amount: number;
   date: string;
-  note: string;
 }

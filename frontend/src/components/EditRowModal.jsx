@@ -1,7 +1,9 @@
 import './EditRowModal.css';
 
-import { editExistingBudgetLineItem } from '../utils/EditBudget';
 import { useState } from 'react';
+
+// import { editExistingBudgetLineItem } from '../utils/EditBudget';
+
 
 export function EditRowModal( { row, handleClose } ) {
   const [ editRow, setEditRow ] = useState( row );
@@ -22,13 +24,10 @@ export function EditRowModal( { row, handleClose } ) {
 
     tempRow[ index ] = tempObj;
     setEditRow( tempRow );
-    console.log( editRow );
   };
 
   const handleSubmit = () => {
-    console.log( editRow );
-    editExistingBudgetLineItem( editRow )
-    console.log( `Form submitted` );
+    // editExistingBudgetLineItem( editRow )
   };
 
   return (
