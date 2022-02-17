@@ -1,5 +1,5 @@
 export default interface Budget {
-  transactionId?: number;
+  budgetId?: number;
   accountId: string;
   categoryType: string;
   category: string;

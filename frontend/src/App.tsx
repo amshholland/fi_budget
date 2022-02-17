@@ -3,7 +3,9 @@ import './App.css';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { EditBudget } from './components/EditBudget';
+import { EditTransaction } from './components/EditTransactions';
 import { ExistingBudgetData } from './components/ExistingBudgetData';
+import { ExistingTransactionData } from './components/ExistingTransactionData';
 import { Goals } from './components/Goals';
 import Header from './components/Header';
 import { NetWorth } from './components/NetWorth';
@@ -26,7 +28,9 @@ function App() {
             <NetWorth />
           </Route>
           <Route path="/transactions">
-            <Transactions />
+            <ExistingTransactionData />
+            <EditTransaction />
+
           </Route>
         </Switch>
       </Router>

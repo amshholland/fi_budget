@@ -9,7 +9,8 @@ interface Props {
   rows: Budget[];
 }
 
-export function TableBody( { rows }: Props ) {
+
+export function BudgetTable( { rows }: Props ) {
   const [ editableRow, setEditableRow ] = useState<Budget | null>( null );
   const [ deleteRows, setDeleteRows ] = useState<Budget[]>( [] );
 
@@ -25,11 +26,12 @@ export function TableBody( { rows }: Props ) {
     <tbody>
       { rows.map( ( row, idx ) => (
         <tr key={ idx }>
-          <td><input type="checkbox" value={ row.transactionId } onClick={ () => handleAddToDelete( row ) } /></td>
-          <td>{ row.categoryType }</td>
+          <td><input type="checkbox" value={ row.budgetId } onClick={ () => handleAddToDelete( row ) } /></td>
+
           <td>{ row.category }</td>
-          <td>{ row.amount }</td>
+          <td>${ row.amount }</td>
           <td>{ row.date }</td>
+
           <td><button className='hiddenButton' onClick={ () => openEditModal( row ) }>
             <img className="editIcon" src={ process.env.PUBLIC_URL + '/edit_icon.png' } />
           </button>

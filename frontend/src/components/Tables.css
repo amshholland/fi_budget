@@ -1,10 +1,17 @@
 .ExistingBudgetData,
 .EditBudget {
+    display: flex;
+    flex-direction: column;
     width: 75vw;
-    margin-top: 12%;
+    margin-top: 20%;
     margin-left: auto;
     margin-right: auto;
     border: 2px solid grey;
+}
+
+.GenericTable {
+    background-color: aqua;
+    height: 50px;
 }
 
 .categoryType {

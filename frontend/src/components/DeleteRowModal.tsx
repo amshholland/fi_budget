@@ -1,6 +1,6 @@
 import Budget from '../model/budget';
-import { TableBody } from './Table/TableBody';
-import { deleteBudgetItem } from '../service/Budget';
+import { BudgetTable } from './Table/BudgetTable';
+import { deleteBudgetByBudgetId } from '../service/Budget';
 
 interface Props {
   rows: Budget[];
@@ -9,7 +9,7 @@ interface Props {
 
 export function DeleteRowModal( { rows, handleClose }: Props ) {
   const handleDelete = ( rows: Budget[] ) => {
-    rows.map( ( row ) => deleteBudgetItem( row.transactionId! ) )
+    rows.map( ( row ) => deleteBudgetByBudgetId( row.budgetId! ) )
       ;
     // alert( `${ row.category } deleted` );
     // handleClose();
@@ -19,7 +19,7 @@ export function DeleteRowModal( { rows, handleClose }: Props ) {
     <div className="showHideClassName" >
       <button onClick={ handleClose }>x</button>
       <h4>Are you sure you want to remove the following row(s)?</h4>
-      <TableBody rows={ rows } />
+      <BudgetTable rows={ rows } />
       <button
         onClick={ () => handleDelete( rows ) }
         className="btn btn-success float-right"

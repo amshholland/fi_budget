@@ -4,16 +4,17 @@ import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
 import Budget from '../model/budget';
-import { TableBody } from './Table/TableBody';
+import { BudgetTable } from './Table/BudgetTable';
+import { GenericTable } from './Table/GenericTable'
 import { TableHeader } from './Table/TableHeader';
-import { getBudgets } from '../service/Budget';
+import { getBudgetsForAccount } from '../service/Budget';
 
 export function ExistingBudgetData() {
   const { userFromDb } = useContext( AuthContext );
   const [ rows, setRows ] = useState<Budget[]>( [] );
   const [ dataLoaded, setDataLoaded ] = useState( false );
 
-  const rowLabels = [ "Type", "Category", "Amount", "Date", "", "" ];
+  const headerLabels = [ "", "Type", "Category", "Amount", "Date", "", "" ];
 
   useEffect( () => {
     loadBudgetData();
@@ -21,7 +22,7 @@ export function ExistingBudgetData() {
 
   function loadBudgetData() {
     if ( userFromDb ) {
-      getBudgets( userFromDb._id! ).then( ( budget ) => {
+      getBudgetsForAccount( userFromDb._id! ).then( ( budget ) => {
         setRows( budget );
         setDataLoaded( true );
       } );
@@ -36,8 +37,8 @@ export function ExistingBudgetData() {
         <tr><td>Create Your Budget Below</td></tr>
       ) : (
         <>
-              <TableHeader headerLabels={ rowLabels } />
-              <TableBody rows={ rows } />
+              <TableHeader headerLabels={ headerLabels } />
+              <GenericTable rows={ rows as any as Budget[] } />
             </>
       )
       }

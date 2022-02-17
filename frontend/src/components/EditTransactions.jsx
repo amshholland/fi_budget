@@ -1,13 +1,12 @@
 import './Tables.css';
 
-import { addBudgetForAccount, deleteBudgetByBudgetId, editExistingBudget } from '../service/Budget';
 import { useContext, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
 import { TableHeader } from './Table/TableHeader';
-import { handleAddNewBudget } from '../utils/EditBudget';
+import { addTransactionsForAccount } from '../service/Transaction';
 
-export function EditBudget() {
+export function EditTransaction() {
   const { userFromDb } = useContext( AuthContext );
   const [ rows, setRows ] = useState( [ {} ] );
   const columnLabels = [ "Type", "Category", "Amount", "Date", "" ];
@@ -19,7 +18,7 @@ export function EditBudget() {
 
   const handleSubmit = () => {
     if ( rows.length != 0 ) {
-      addBudgetForAccount( rows );
+      addTransactionsForAccount( rows );
     }
     console.log( `Form submitted, ${ userFromDb?._id }` );
   };
@@ -39,7 +38,6 @@ export function EditBudget() {
 
     let tempObj = {};
     Object.assign( tempObj, { "accountId": userFromDb?._id } );
-    Object.assign( tempObj, { "budgetMonth": "02" } )
     Object.assign( tempObj, rows[ index ] );
 
     tempObj[ column ] = value;
@@ -52,9 +50,9 @@ export function EditBudget() {
 
 
   return (
-    <table className="EditBudget">
+    <table className="EditTransaction">
       <TableHeader headerLabels={ columnLabels } />
-      <tbody className='AddToBudget' >
+      <tbody className='AddToTransaction' >
         { rows.map( ( item, idx ) => (
           <tr key={ idx } onChange={ ( e ) => updateState( e ) }>
             <td>

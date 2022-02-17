@@ -1,7 +1,14 @@
+import Budget from "../../model/budget";
+import { TableHeader } from "./TableHeader";
 
-export function Table() {
+interface Props {
+  headerLabels: string[],
+  rows: Budget[];
+}
+export function Table( { headerLabels, rows }: Props ) {
   return (
     <table>
+      <TableHeader headerLabels={ headerLabels } />
 
     </table>
   );
