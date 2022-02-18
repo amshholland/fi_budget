@@ -5,16 +5,13 @@ import Transaction from '../../model/transaction';
 import { useState } from 'react';
 
 interface ObjectType {
-  object: Budget | Transaction
+  rows: Budget[] | Transaction[] 
 }
 
-type GenericTableProps<T> = {
-  rows: Array<Budget> | Array<Transaction>;
-};
 
-export function GenericTable<T extends ObjectType>( { rows }: GenericTableProps<T> ) {
-  const [ data, setData ] = useState<Budget[] | Transaction[]>( rows );
-  data.map( ( row ) => {
+export function GenericTable( { rows }: ObjectType ) {
+  rows!.map( ( row ) => {
+    console.log( row )
     Object.keys( row ).forEach( ( key, value ) =>
       console.log( row.accountId )
     );
@@ -23,12 +20,23 @@ export function GenericTable<T extends ObjectType>( { rows }: GenericTableProps<
 
   return (
     <tbody className="GenericTable" >
-      { data.map( ( row, idx ) => {
-        <tr key={ idx }>
+      <tr><td>1</td></tr>
+      { rows !== null && (
+        <tr>{ rows!.map( row =>
+          <>
           <td>{ row.category }</td>
-          <td>${ row.amount }</td>
-          <td>{ row.date }</td>
-        </tr>;
+            <td>{ row.amount }</td>
+            <td>{ row.date }</td>
+          </>
+        ) }</tr> ) }
+
+      { rows!.map( ( row, idx ) => {
+        <tr><td>2</td></tr>;
+        // <tr key={ idx }>
+        //   <td>{ row.category }</td>
+        //   <td>${ row.amount }</td>
+        //   <td>{ row.date }</td>
+        // </tr>;
       } ) }
     </tbody>
   );
