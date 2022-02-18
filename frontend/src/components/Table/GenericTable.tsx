@@ -2,9 +2,10 @@ import '../Tables.css';
 
 import Budget from '../../model/budget';
 import Transaction from '../../model/transaction';
+import { useState } from 'react';
 
 interface ObjectType {
-  object: Array<Budget> | Array<Transaction>;
+  object: Budget | Transaction
 }
 
 type GenericTableProps<T> = {
@@ -12,21 +13,21 @@ type GenericTableProps<T> = {
 };
 
 export function GenericTable<T extends ObjectType>( { rows }: GenericTableProps<T> ) {
-  rows.map( ( row ) => {
-    Object.keys( row ).map( function ( key, index ) {
-      console.log( row[ index ] );
-    } );
+  const [ data, setData ] = useState<Budget[] | Transaction[]>( rows );
+  data.map( ( row ) => {
+    Object.keys( row ).forEach( ( key, value ) =>
+      console.log( row.accountId )
+    );
   } );
+
 
   return (
     <tbody className="GenericTable" >
-      { rows.map( ( row, idx, array ) => {
+      { data.map( ( row, idx ) => {
         <tr key={ idx }>
-          {/* { row.map( ( column ) => {
-            <td> { column } </td>;
-          } )
-          } */}
-          <> { row } </>;
+          <td>{ row.category }</td>
+          <td>${ row.amount }</td>
+          <td>{ row.date }</td>
         </tr>;
       } ) }
     </tbody>
