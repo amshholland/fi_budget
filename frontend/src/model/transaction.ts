@@ -1,5 +1,5 @@
 export default interface Transaction {
-  transactionId?: number;
+  id?: number;
   accountId: string;
   category: string;
   amount: number;

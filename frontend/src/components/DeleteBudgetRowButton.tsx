@@ -1,31 +1,33 @@
+import { SetStateAction, useState } from "react";
+
 import Budget from "../model/budget";
 import { DeleteRowModal } from "./DeleteRowModal";
 import { Modal } from "react-bootstrap";
-import { useState } from "react";
+import Transaction from "../model/transaction";
 
 interface Props {
-  rows: Budget[];
+  row: Budget[] | Transaction[];
 }
 
-export function DeleteBudgetRowButton( { rows }: Props ) {
-  const [ deleteRows, setDeleteRows ] = useState<Budget[]>( rows );
-
-  const openConfirmDeletionModal = ( rows: Budget[] ) => setDeleteRows( rows );
-  const closeConfirmDeletionModal = () => setDeleteRows( [] );
+export function DeleteBudgetRowButton( { row }: Props ) {
+  const [ deleteRow, setDeleteRow ] = useState<any>( row );
+  console.log( deleteRow );
+  const openConfirmDeletionModal = ( row: Budget | Transaction ) => setDeleteRow( row );
+  const closeConfirmDeletionModal = () => setDeleteRow( null );
 
   return (
     <>
-      <button className='hiddenButton' onClick={ () => openConfirmDeletionModal( deleteRows ) } >
+      <button className='hiddenButton' onClick={ () => openConfirmDeletionModal( deleteRow! ) } >
       <img className="deleteIcon" src={ process.env.PUBLIC_URL + '/delete_icon.png' } />
       </button>
 
       <Modal
-        show={ deleteRows.length !== 0 }
+        show={ deleteRow.length !== 0 }
         className="mymodal"
         centered
       >
-        { deleteRows.length !== 0 && (
-          <DeleteRowModal rows={ deleteRows } handleClose={ closeConfirmDeletionModal } />
+        { deleteRow.length !== 0 && (
+          <DeleteRowModal row={ deleteRow } handleClose={ closeConfirmDeletionModal } />
         ) }
       </Modal>
     </>

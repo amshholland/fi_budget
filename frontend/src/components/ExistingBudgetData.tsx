@@ -38,7 +38,8 @@ export function ExistingBudgetData() {
       ) : (
         <>
               <TableHeader headerLabels={ headerLabels } />
-              <GenericTable rows={ rows as any as Budget[] } />
+              <BudgetTable rows={ rows } />
+              {/* <GenericTable rows={ rows } /> */ }
             </>
       )
       }

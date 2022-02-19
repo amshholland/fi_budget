@@ -23,7 +23,7 @@ export function TransactionTable( { rows }: Props ) {
     <tbody>
       { rows.map( ( row, idx ) => (
         <tr key={ idx }>
-          <td><input type="checkbox" value={ row.budgetId } onClick={ () => handleAddToDelete( row ) } /></td>
+          <td><input type="checkbox" value={ row.id } onClick={ () => handleAddToDelete( row ) } /></td>
           <td>{ row.categoryType }</td>
           <td>{ row.category }</td>
           <td>{ row.amount }</td>

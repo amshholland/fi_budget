@@ -14,10 +14,10 @@ export function addBudgetForAccount( rows: Budget[] ): Promise<Budget[]> {
   return axios.post( `${ baseUrl }/budget/add`, rows ).then( res => res.data );
 }
 
-export function deleteBudgetByBudgetId( budgetId: number ): Promise<Budget> {
-  return axios.get( `${ baseUrl }/budget/delete/${ budgetId }` ).then( res => res.data );
+export function deleteBudgetByBudgetId( id: number ): Promise<Budget> {
+  return axios.get( `${ baseUrl }/budget/delete/${ id }` ).then( res => res.data );
 }
 
 export function editExistingBudget( row: Budget ): Promise<Budget> {
-  return axios.put( `${ baseUrl }/budget/edit/${ row.budgetId }`, row ).then( res => res.data );
+  return axios.put( `${ baseUrl }/budget/edit/${ row.id }`, row ).then( res => res.data );
 }

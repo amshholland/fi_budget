@@ -35,13 +35,13 @@ class BaseModel(Model):
 
 
 class Budget(BaseModel):
-    budgetId = AutoField(null=True)
+    id = AutoField(null=True)
     accountId = CharField()
-    categoryType = CharField()
     category = CharField()
+    categoryType = CharField()
     amount = MoneyField()
-    budgetMonth = CharField()
     date = CharField()
+    budgetMonth = CharField()
 
     def budgets():
         return (Budget
@@ -49,7 +49,7 @@ class Budget(BaseModel):
 
 
 class Transaction(BaseModel):
-    transactionId = AutoField(null=True)
+    id = AutoField(null=True)
     accountId = CharField()
     category = CharField()
     amount = MoneyField()
@@ -111,31 +111,31 @@ def addBudgetForAccount():
     return json_response({'success': 'budget found'}, 200)
 
 
-@app.route("/budget/<budgetId>")
-def getBudgetByBudgetId(budgetId):
+@app.route("/budget/<id>")
+def getBudgetByBudgetId(id):
     try:
         query = list((Budget.select().where(
-            Budget.budgetId == budgetId)).dicts())
+            Budget.id == id)).dicts())
         return json_response(query, 200)
     except:
-        return json_response({'fail': budgetId}, 400)
+        return json_response({'fail': id}, 400)
 
 
-@app.route("/budget/delete/<budgetId>")
-def deleteBudgetByBudgetId(budgetId):
+@app.route("/budget/delete/<id>")
+def deleteBudgetByBudgetId(id):
     try:
-        query = Budget.get(Budget.budgetId == budgetId)
+        query = Budget.get(Budget.id == id)
         query.delete_instance()
         return json_response('deleted', 200)
     except:
         return json_response({'fail': 'budget not found'}, 400)
 
 
-@app.route("/budget/edit/<budgetId>")
+@app.route("/budget/edit/<id>")
 def editExistingBudget(row):
     print(row)
     try:
-        query = Budget.get(Budget.budgetId == budgetId)
+        query = Budget.get(Budget.id == id)
         query.save(row)
         return json_response('updated', 200)
     except:
@@ -170,31 +170,32 @@ def addTransactionsForAccount():
         query.execute()
     return json_response({'success': 'budget found'}, 200)
 
-@app.route("/transaction/<transactionId>")
-def getTransactionByTransactionId(transactionId):
+
+@app.route("/transaction/<id>")
+def getTransactionByTransactionId(id):
     try:
         query = list((Transaction.select().where(
-            Transaction.transactionId == transactionId)).dicts())
+            Transaction.id == id)).dicts())
         return json_response(query, 200)
     except:
-        return json_response({'fail': transactionId}, 400)
+        return json_response({'fail': id}, 400)
 
 
-@app.route("/transactions/delete/<transactionId>")
-def deleteTransaction(transactionId):
+@app.route("/transactions/delete/<id>")
+def deleteTransaction(id):
     try:
-        query = Transaction.get(Transaction.transactionId == transactionId)
+        query = Transaction.get(Transaction.id == id)
         query.delete_instance()
         return json_response('deleted', 200)
     except:
         return json_response({'fail': 'budget not found'}, 400)
 
 
-@app.route("/transaction/edit/<transactionId>")
+@app.route("/transaction/edit/<id>")
 def editExistingTransaction(row):
     print(row)
     try:
-        query = Transaction.get(Transaction.transactionId == transactionId)
+        query = Transaction.get(Transaction.id == id)
         query.save(row)
         return json_response('updated', 200)
     except:

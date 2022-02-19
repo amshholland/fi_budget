@@ -15,10 +15,10 @@ export function addTransactionsForAccount( rows: Transaction[] ): Promise<Transa
   return axios.post( `${ baseUrl }/add`, rows ).then( res => res.data );
 }
 
-export function deleteTransaction( transactionId: number ): Promise<Transaction> {
-  return axios.get( `${ baseUrl }/transaction/delete/${ transactionId }` ).then( res => res.data );
+export function deleteTransaction( id: number ): Promise<Transaction> {
+  return axios.get( `${ baseUrl }/transaction/delete/${ id }` ).then( res => res.data );
 }
 
 export function editExistingTransaction( row: Transaction ): Promise<Transaction> {
-  return axios.put( `${ baseUrl }/transaction/edit/${ row.transactionId }`, row ).then( res => res.data );
+  return axios.put( `${ baseUrl }/transaction/edit/${ row.id }`, row ).then( res => res.data );
 }
