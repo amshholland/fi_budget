@@ -32,8 +32,6 @@ function NavButtons( { onClickOutside, showNavButtons }: Props ) {
     <div className="NavButtons" ref={ ref }>
       <div className="buttonGroup" style={ { display: showNavButtons } }>
         <button className="headerButton" onClick={ () => onClickOutside() }><Link className="buttonLink" to="/budget">Budget</Link></button>
-        <button className="headerButton" onClick={ () => onClickOutside() }><Link className="buttonLink" to="/goals">Goals</Link></button>
-        <button className="headerButton" onClick={ () => onClickOutside() }><Link className="buttonLink" to="/net-worth">Net Worth</Link></button>
         <button className="headerButton" onClick={ () => onClickOutside() }><Link className="buttonLink" to="/transactions">Transactions</Link></button>
       </div>
     </div>

@@ -6,10 +6,7 @@ import { EditBudget } from './components/EditBudget';
 import { EditTransaction } from './components/EditTransactions';
 import { ExistingBudgetData } from './components/ExistingBudgetData';
 import { ExistingTransactionData } from './components/ExistingTransactionData';
-import { Goals } from './components/Goals';
 import Header from './components/Header/Header';
-import { NetWorth } from './components/NetWorth';
-import { Transactions } from './components/Transactions';
 
 function App() {
   return (
@@ -21,16 +18,9 @@ function App() {
             <ExistingBudgetData />
             <EditBudget />
           </Route>
-          <Route path="/goals">
-            <Goals />
-          </Route>
-          <Route path="/net-worth">
-            <NetWorth />
-          </Route>
           <Route path="/transactions">
             <ExistingTransactionData />
             <EditTransaction />
-
           </Route>
         </Switch>
       </Router>

@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from "../context/auth-context";
 import Budget from '../model/budget';
 import { BudgetTable } from './Table/BudgetTable';
-import { GenericTable } from './Table/GenericTable'
 import { TableHeader } from './Table/TableHeader';
 import { getBudgetsForAccount } from '../service/Budget';
 
