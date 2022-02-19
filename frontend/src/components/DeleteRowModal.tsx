@@ -1,5 +1,4 @@
 import Budget from '../model/budget';
-import { BudgetTable } from './Table/BudgetTable';
 import Transaction from '../model/transaction';
 import { handleDelete } from '../utils/EditBudget';
 
