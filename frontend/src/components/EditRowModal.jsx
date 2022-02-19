@@ -53,7 +53,7 @@ export function EditRowModal( { row, handleClose } ) {
               <td><button
                 onClick={ handleSubmit }
                 className="btn btn-success float-right"
-              ><img src={ process.env.PUBLIC_URL + '/save_icon.png' } /></button></td>
+              ><img className="saveIcon" src={ process.env.PUBLIC_URL + '/save_icon.jpg' } /></button></td>
 
             </tr>
           </tbody>

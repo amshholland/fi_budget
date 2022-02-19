@@ -3,11 +3,11 @@ import './Table/Tables.css';
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
+import { DataTable } from './Table/DataTable';
 import Transaction from '../model/transaction';
-import { TransactionTable } from './Table/TransactionTable';
 import { getTransactionsForAccount } from '../service/Transaction';
 
-export function ExistingTransactionData() {
+export function TransactionData() {
   const { userFromDb } = useContext( AuthContext );
   const [ rows, setRows ] = useState<Transaction[]>( [] );
   const [ dataLoaded, setDataLoaded ] = useState( false );
@@ -34,7 +34,8 @@ export function ExistingTransactionData() {
       ) : rows.length === 0 ? (
         <tr><td>Create Your Transaction Below</td></tr>
       ) : (
-            <>
+        <>
+          <DataTable rows={ rows } headerLabels={ headerLabels } />
         </>
       )
       }

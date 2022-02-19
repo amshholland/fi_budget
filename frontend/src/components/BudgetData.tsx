@@ -4,15 +4,15 @@ import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
 import Budget from '../model/budget';
-import { BudgetTable } from './Table/BudgetTable';
+import { DataTable } from './Table/DataTable';
 import { getBudgetsForAccount } from '../service/Budget';
 
-export function ExistingBudgetData() {
+export function BudgetData() {
   const { userFromDb } = useContext( AuthContext );
   const [ rows, setRows ] = useState<Budget[]>( [] );
   const [ dataLoaded, setDataLoaded ] = useState( false );
 
-  const headerLabels = [ "", "Type", "Category", "Amount", "Date", "", "" ];
+  const headerLabels = [ "", "Type", "Category", "Amount", "Date", "" ];
 
   useEffect( () => {
     loadBudgetData();
@@ -34,8 +34,8 @@ export function ExistingBudgetData() {
       ) : rows.length === 0 ? (
         <tr><td>Create Your Budget Below</td></tr>
       ) : (
-        <>
-              <BudgetTable rows={ rows } headerLabels={ headerLabels } />
+            <>
+              <DataTable rows={ rows } headerLabels={ headerLabels } />
             </>
       )
       }

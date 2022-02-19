@@ -2,21 +2,48 @@
 .EditBudget {
     display: flex;
     flex-direction: column;
-    width: 75vw;
-    margin-top: 20%;
+    width: 90vw;
+    margin-top: 80px;
     margin-left: auto;
     margin-right: auto;
-    border: 2px solid grey;
 }
 
 .Table {
-    background-color: aqua;
+    background-color: #E6E6E6;
     height: auto;
     table-layout: auto;
+    border: 2px solid #489093;
 }
 
 .TableHeader {
     width: 100%;
+}
+
+th {
+    font-size: 10pt;
+    width: auto;
+}
+
+.TableBody .row,
+.TableHeader .row {
+    width: auto;
+    align-items: baseline;
+}
+
+tr .row {
+    border-color: black;
+}
+
+td {
+    align-items: baseline;
+}
+
+.centeredCell {
+    text-align: center;
+    height: 18px;
+    width: 19px;
+    align-items: center;
+    justify-content: center;
 }
 
 .categoryType {
@@ -52,22 +79,6 @@ h2 {
     text-align: center;
 }
 
-th {
-    font-size: 10pt;
-    width: auto;
-}
-
-.TableBody .row,
-.TableHeader .row {
-    width: auto;
-    align-items: baseline;
-}
-
-td {
-    align-items: baseline;
-    border: 1px solid black;
-}
-
 .amtContainer {
     display: flex;
 }
@@ -85,6 +96,7 @@ td {
 }
 
 .editIcon,
-.deleteIcon {
+.deleteIcon,
+.saveIcon {
     height: 18px;
 }

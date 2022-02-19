@@ -21,7 +21,7 @@ export function DeleteRowModal( { row, handleClose }: Props ) {
       <button
         onClick={ () => handleDelete( row.id! ) }
         className="btn btn-success float-right"
-      ><img src={ process.env.PUBLIC_URL + '/save_icon.png' } /></button>
+      ><img className="saveIcon" src={ process.env.PUBLIC_URL + '/save_icon.jpg' } /></button>
     </div >
   );
 };
