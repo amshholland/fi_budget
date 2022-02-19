@@ -9,9 +9,14 @@
     border: 2px solid grey;
 }
 
-.GenericTable {
+.Table {
     background-color: aqua;
-    height: 50px;
+    height: auto;
+    table-layout: auto;
+}
+
+.TableHeader {
+    width: 100%;
 }
 
 .categoryType {
@@ -49,14 +54,18 @@ h2 {
 
 th {
     font-size: 10pt;
+    width: auto;
 }
 
-tr {
+.TableBody .row,
+.TableHeader .row {
+    width: auto;
     align-items: baseline;
 }
 
 td {
     align-items: baseline;
+    border: 1px solid black;
 }
 
 .amtContainer {

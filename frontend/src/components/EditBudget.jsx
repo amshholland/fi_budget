@@ -1,10 +1,9 @@
-import './Tables.css';
+import './Table/Tables.css';
 
 import { addBudgetForAccount, deleteBudgetByBudgetId, editExistingBudget } from '../service/Budget';
 import { useContext, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
-import { TableHeader } from './Table/TableHeader';
 import { handleAddNewBudget } from '../utils/EditBudget';
 
 export function EditBudget() {
@@ -53,7 +52,6 @@ export function EditBudget() {
 
   return (
     <table className="EditBudget">
-      <TableHeader headerLabels={ columnLabels } />
       <tbody className='AddToBudget' >
         { rows.map( ( item, idx ) => (
           <tr key={ idx } onChange={ ( e ) => updateState( e ) }>

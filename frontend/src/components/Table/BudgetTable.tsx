@@ -1,4 +1,4 @@
-import '../Tables.css';
+import './Tables.css';
 
 import { bulkDeleteBudgetLineItems, handleDelete } from "../../utils/EditBudget";
 
@@ -11,14 +11,14 @@ import { useState } from "react";
 
 interface Props {
   rows: Budget[] | Transaction[];
+  headerLabels: string[]
 }
 
 
-export function BudgetTable( { rows }: Props ) {
+export function BudgetTable( { rows, headerLabels }: Props ) {
   const [ editableRow, setEditableRow ] = useState<Budget | Transaction | null>( null );
   const [ deleteRow, setDeleteRow ] = useState<Budget | Transaction | null>( null );
   const [ deleteRows, setDeleteRows ] = useState<Budget[] | Transaction[] | []>( [] );
-  console.log( deleteRow );
 
   const openEditModal = ( row: Budget | Transaction ) => setEditableRow( row );
   const closeEditModal = () => setEditableRow( null );
@@ -34,7 +34,17 @@ export function BudgetTable( { rows }: Props ) {
   };
 
   return (
-    <tbody>
+    <table>
+      <thead className="TableHeader">
+        <tr className="row">
+          { headerLabels.map( ( column, index ) => (
+            <th className="text-center" key={ index }>
+              { column }
+            </th>
+          ) ) }
+        </tr>
+      </thead>
+      <tbody className="Table">
       { rows.map( ( row, idx ) => (
         <tr key={ idx }>
           <td><input type="checkbox" value={ row.id } onClick={ () => handleAddToDelete( row ) } /></td>
@@ -74,6 +84,7 @@ export function BudgetTable( { rows }: Props ) {
       <Modal show={ deleteRows.length !== 0 } className="mymodal">
         <button className='hiddenButton' onClick={ () => bulkDeleteBudgetLineItems( deleteRows ) }><img className='deleteIcon' src={ process.env.PUBLIC_URL + '/delete_icon.png' } /></button>
       </Modal>
-    </tbody>
+      </tbody>
+    </table>
   );
 }

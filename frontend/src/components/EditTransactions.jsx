@@ -1,9 +1,8 @@
-import './Tables.css';
+import './Table/Tables.css';
 
 import { useContext, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
-import { TableHeader } from './Table/TableHeader';
 import { addTransactionsForAccount } from '../service/Transaction';
 
 export function EditTransaction() {
@@ -51,7 +50,6 @@ export function EditTransaction() {
 
   return (
     <table className="EditTransaction">
-      <TableHeader headerLabels={ columnLabels } />
       <tbody className='AddToTransaction' >
         { rows.map( ( item, idx ) => (
           <tr key={ idx } onChange={ ( e ) => updateState( e ) }>

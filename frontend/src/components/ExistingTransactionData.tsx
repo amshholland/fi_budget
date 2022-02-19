@@ -1,9 +1,8 @@
-import './Tables.css';
+import './Table/Tables.css';
 
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
-import { TableHeader } from './Table/TableHeader';
 import Transaction from '../model/transaction';
 import { TransactionTable } from './Table/TransactionTable';
 import { getTransactionsForAccount } from '../service/Transaction';
@@ -35,8 +34,7 @@ export function ExistingTransactionData() {
       ) : rows.length === 0 ? (
         <tr><td>Create Your Transaction Below</td></tr>
       ) : (
-        <>
-          <TableHeader headerLabels={ headerLabels } />
+            <>
         </>
       )
       }

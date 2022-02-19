@@ -1,11 +1,10 @@
-import './Tables.css';
+import './Table/Tables.css';
 
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
 import Budget from '../model/budget';
 import { BudgetTable } from './Table/BudgetTable';
-import { TableHeader } from './Table/TableHeader';
 import { getBudgetsForAccount } from '../service/Budget';
 
 export function ExistingBudgetData() {
@@ -36,9 +35,7 @@ export function ExistingBudgetData() {
         <tr><td>Create Your Budget Below</td></tr>
       ) : (
         <>
-              <TableHeader headerLabels={ headerLabels } />
-              <BudgetTable rows={ rows } />
-              {/* <GenericTable rows={ rows } /> */ }
+              <BudgetTable rows={ rows } headerLabels={ headerLabels } />
             </>
       )
       }
