@@ -7,7 +7,7 @@ import { EditTransaction } from './components/EditTransactions';
 import { ExistingBudgetData } from './components/ExistingBudgetData';
 import { ExistingTransactionData } from './components/ExistingTransactionData';
 import { Goals } from './components/Goals';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import { NetWorth } from './components/NetWorth';
 import { Transactions } from './components/Transactions';
 

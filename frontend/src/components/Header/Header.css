@@ -1,0 +1,96 @@
+.Header {
+    width: 99vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    background: rgb(255, 255, 255);
+}
+
+.Header .userDiv,
+.navDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 107px;
+    position: absolute;
+    top: 0;
+    margin: 5px;
+    z-index: 2;
+}
+
+.Header .navDiv {
+    left: 0;
+}
+
+.Header .userDiv {
+    right: 0;
+}
+
+.navDiv .hamburgerIcon {
+    border-radius: 50%;
+    margin: 10px;
+    height: 50px;
+    width: 50px;
+    filter: drop-shadow(0 0 3px rgb(0, 0, 0));
+    border: 3px solid #2F455C;
+    background-color: #21D0B3;
+}
+
+.Header .logoDiv {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    /* filter: drop-shadow(0 0 3px rgb(0, 0, 0)); */
+    width: 100%;
+    top: 0;
+}
+
+.logoDiv .logo {
+    height: 75px;
+    filter: drop-shadow(0 0 3px rgb(0, 0, 0));
+}
+
+.Header .signInDiv {
+    top: 0;
+    right: 0;
+    position: absolute;
+    z-index: 2;
+    margin: 5px;
+}
+
+.userDiv img {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    filter: drop-shadow(0 0 2px #2F455C);
+    border: 3px solid #2F455C;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    filter: drop-shadow(0 0 3px rgb(0, 0, 0));
+}
+
+.buttonGroup .headerButton {
+    font-size: 1em;
+    text-align: center;
+    border: none;
+    height: 2.2em;
+    border-radius: 4px;
+    background-color: #7dcf46;
+    margin: 3px;
+    color: white;
+    filter: drop-shadow(0 0 3px rgb(0, 0, 0));
+}
+
+.buttonGroup .buttonLink {
+    color: white;
+    text-decoration: none;
+}
