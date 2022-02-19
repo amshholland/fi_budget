@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import { BudgetTable } from '../components/BudgetTable';
-import { EditBudget } from '../components/EditBudget';
+import { EditBudget } from '../components/Tables/EditingTable';
 
 describe( "Budget Table", function () {
   render( <BudgetTable /> );

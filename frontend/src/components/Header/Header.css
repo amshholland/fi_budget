@@ -71,14 +71,14 @@
     border: 3px solid #2F455C;
 }
 
-.buttonGroup {
+.buttonGroupVertical {
     display: flex;
     flex-direction: column;
     text-decoration: none;
     filter: drop-shadow(0 0 3px rgb(0, 0, 0));
 }
 
-.buttonGroup .headerButton {
+.buttonGroupVertical .headerButton {
     font-size: 1em;
     text-align: center;
     border: none;
@@ -90,7 +90,7 @@
     filter: drop-shadow(0 0 3px rgb(0, 0, 0));
 }
 
-.buttonGroup .buttonLink {
+.buttonGroupVertical .buttonLink {
     color: white;
     text-decoration: none;
 }

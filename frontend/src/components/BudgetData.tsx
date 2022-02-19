@@ -1,10 +1,10 @@
-import './Table/Tables.css';
+import './Tables/Tables.css';
 
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
 import Budget from '../model/budget';
-import { DataTable } from './Table/DataTable';
+import { DataTable } from './Tables/DataTable';
 import { getBudgetsForAccount } from '../service/Budget';
 
 export function BudgetData() {
@@ -28,7 +28,7 @@ export function BudgetData() {
   }
 
   return (
-    <table className="ExistingBudgetData">
+    <div className="ExistingBudgetData">
       { !dataLoaded ? (
         <tr><td id="loading">Loading...</td></tr>
       ) : rows.length === 0 ? (
@@ -39,6 +39,6 @@ export function BudgetData() {
             </>
       )
       }
-    </table >
+    </div >
   );
 };

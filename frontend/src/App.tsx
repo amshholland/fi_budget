@@ -2,9 +2,10 @@ import './App.css';
 
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
+import { Budget } from './components/Budget';
 import { BudgetData } from './components/BudgetData';
-import { EditBudget } from './components/EditBudget';
 import { EditTransaction } from './components/EditTransactions';
+import { EditingTable } from './components/Tables/EditingTable';
 import Header from './components/Header/Header';
 import { TransactionData } from './components/TransactionData';
 
@@ -15,8 +16,7 @@ function App() {
         <Header />
         <Switch>
           <Route path="/budget">
-            <BudgetData />
-            <EditBudget />
+            <Budget />
           </Route>
           <Route path="/transactions">
             <TransactionData />

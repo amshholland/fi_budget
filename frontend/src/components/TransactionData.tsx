@@ -1,9 +1,9 @@
-import './Table/Tables.css';
+import './Tables/Tables.css';
 
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
-import { DataTable } from './Table/DataTable';
+import { DataTable } from './Tables/DataTable';
 import Transaction from '../model/transaction';
 import { getTransactionsForAccount } from '../service/Transaction';
 

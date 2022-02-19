@@ -11,7 +11,7 @@ import { useState } from "react";
 
 interface Props {
   rows: Budget[] | Transaction[];
-  headerLabels: string[]
+  headerLabels: string[];
 }
 
 
@@ -27,7 +27,7 @@ export function DataTable( { rows, headerLabels }: Props ) {
   const closeConfirmDeletionModal = () => setDeleteRows( [] );
 
   const handleAddToDelete = ( row: any ) => {
-    console.log( row )
+    console.log( row );
     const tempDeleteRows = [ ...deleteRows, row ];
     setDeleteRows( tempDeleteRows );
 
@@ -44,47 +44,47 @@ export function DataTable( { rows, headerLabels }: Props ) {
           ) ) }
         </tr>
       </thead>
-      <tbody className="Table">
-      { rows.map( ( row, idx ) => (
-        <tr className="row" key={ idx }>
-          <td className='centeredCell'><input type="checkbox" value={ row.id } onClick={ () => handleAddToDelete( row ) } /></td>
-          <td>categoryType</td>
-          <td>{ row.category }</td>
-          <td>${ row.amount }</td>
-          <td>{ row.date }</td>
-          <td className='centeredCell'><button className='hiddenButton' onClick={ () => openEditModal( row ) }>
-            <img className="editIcon" src={ process.env.PUBLIC_URL + '/edit_icon.png' } />
-          </button>
-          </td>
-          <td className='centeredCell'>
+      <tbody className="TableBody">
+        { rows.map( ( row, idx ) => (
+          <tr className="row" key={ idx }>
+            <td className='centeredCell'><input type="checkbox" value={ row.id } onClick={ () => handleAddToDelete( row ) } /></td>
+            <td>categoryType</td>
+            <td>{ row.category }</td>
+            <td>${ row.amount }</td>
+            <td>{ row.date }</td>
+            <td className='centeredCell'><button className='hiddenButton' onClick={ () => openEditModal( row ) }>
+              <img className="editIcon" src={ process.env.PUBLIC_URL + '/edit_icon.png' } />
+            </button>
+            </td>
+            <td className='centeredCell'>
               <button className='hiddenButton' onClick={ () => openConfirmDeletionModal( row ) } >
                 <img className="deleteIcon" src={ process.env.PUBLIC_URL + '/delete_icon.png' } />
-            </button>
-          </td>
-              <Modal
-                show={ deleteRow !== null }
-                className="mymodal"
-                centered
-              >
-                { deleteRow !== null && (
-                  <DeleteRowModal row={ deleteRow! } handleClose={ closeConfirmDeletionModal } />
-                ) }
-          </Modal>
-        </tr>
-      ) ) }
-      <Modal
-        show={ editableRow !== null }
-        className="mymodal"
-        centered
-      >
-        { editableRow !== null && (
-          <EditRowModal row={ editableRow } handleClose={ closeEditModal } />
-        ) }
-      </Modal>
+              </button>
+            </td>
+            <Modal
+              show={ deleteRow !== null }
+              className="mymodal"
+              centered
+            >
+              { deleteRow !== null && (
+                <DeleteRowModal row={ deleteRow! } handleClose={ closeConfirmDeletionModal } />
+              ) }
+            </Modal>
+          </tr>
+        ) ) }
+        <Modal
+          show={ editableRow !== null }
+          className="mymodal"
+          centered
+        >
+          { editableRow !== null && (
+            <EditRowModal row={ editableRow } handleClose={ closeEditModal } />
+          ) }
+        </Modal>
 
-      <Modal show={ deleteRows.length !== 0 } className="mymodal">
-        <button className='hiddenButton' onClick={ () => bulkDeleteBudgetLineItems( deleteRows ) }><img className='deleteIcon' src={ process.env.PUBLIC_URL + '/delete_icon.png' } /></button>
-      </Modal>
+        <Modal show={ deleteRows.length !== 0 } className="mymodal">
+          <button className='hiddenButton' onClick={ () => bulkDeleteBudgetLineItems( deleteRows ) }><img className='deleteIcon' src={ process.env.PUBLIC_URL + '/delete_icon.png' } /></button>
+        </Modal>
       </tbody>
     </table>
   );

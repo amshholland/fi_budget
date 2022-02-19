@@ -32,7 +32,7 @@ function UserButtons( { onClickOutside, showUserButtons }: Props ) {
 
   return (
     <div className="UserButtons" ref={ ref }>
-      <div className="buttonGroup" style={ { display: showUserButtons } }>
+      <div className="buttonGroupVertical" style={ { display: showUserButtons } }>
         <button className="headerButton" onClick={ () => onClickOutside() }>
           <Link className="buttonLink" to="/budget">EditAccount</Link>
         </button>

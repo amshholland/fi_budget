@@ -1,4 +1,4 @@
-import './Table/Tables.css';
+import './Tables/Tables.css';
 
 import { useContext, useState } from 'react';
 

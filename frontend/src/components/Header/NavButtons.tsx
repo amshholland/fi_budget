@@ -30,7 +30,7 @@ function NavButtons( { onClickOutside, showNavButtons }: Props ) {
 
   return (
     <div className="NavButtons" ref={ ref }>
-      <div className="buttonGroup" style={ { display: showNavButtons } }>
+      <div className="buttonGroupVertical" style={ { display: showNavButtons } }>
         <button className="headerButton" onClick={ () => onClickOutside() }><Link className="buttonLink" to="/budget">Budget</Link></button>
         <button className="headerButton" onClick={ () => onClickOutside() }><Link className="buttonLink" to="/transactions">Transactions</Link></button>
       </div>

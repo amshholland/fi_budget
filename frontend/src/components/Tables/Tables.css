@@ -1,18 +1,24 @@
 .ExistingBudgetData,
-.EditBudget {
+.EditingTable,
+.EditTransactions {
     display: flex;
     flex-direction: column;
-    width: 90vw;
-    margin-top: 80px;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 25%;
     margin-left: auto;
     margin-right: auto;
+    border: 2px solid #489093;
+    background-color: #E6E6E6;
 }
 
 .Table {
     background-color: #E6E6E6;
-    height: auto;
     table-layout: auto;
-    border: 2px solid #489093;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .TableHeader {
@@ -24,10 +30,8 @@ th {
     width: auto;
 }
 
-.TableBody .row,
-.TableHeader .row {
+.TableBody {
     width: auto;
-    align-items: baseline;
 }
 
 tr .row {
@@ -58,22 +62,6 @@ td {
     margin: 2px;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    min-width: max-content;
-    justify-content: center;
-    align-content: center;
-}
-
-.hiddenButton {
-    padding-left: 3px;
-    padding-right: 3px;
-    background: none;
-    border: none;
-}
-
 h2 {
     font-size: 12pt;
     text-align: center;
@@ -95,8 +83,18 @@ h2 {
     width: 125px;
 }
 
-.editIcon,
-.deleteIcon,
-.saveIcon {
-    height: 18px;
+.submitButton {
+    font-size: 1em;
+    text-align: center;
+    border: none;
+    height: 22px;
+    border-radius: 4px;
+    background-color: #7dcf46;
+    margin: 3px;
+    color: white;
+    filter: drop-shadow(0 0 3px rgb(0, 0, 0));
+}
+
+.addIcon {
+    height: 25px;
 }
