@@ -1,19 +1,34 @@
 import './Tables/Tables.css';
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from "../context/auth-context";
 import { addTransactionsForAccount } from '../service/Transaction';
+import { getBudgetCategoriesForAccount } from '../service/Budget';
 
 export function EditTransaction() {
   const { userFromDb } = useContext( AuthContext );
+  const [ categories, setCategories ] = useState( [] )
   const [ rows, setRows ] = useState( [ {} ] );
-  const columnLabels = [ "Type", "Category", "Amount", "Date", "" ];
+  const headerLabels = [ "Type", "Category", "Amount", "Date", "" ];
+
+  useEffect( () => {
+    getBudgetCategories();
+  }, [] );
 
   const handleAddRow = () => {
     const item = {};
     setRows( [ ...rows, item ] );
   };
+
+  function getBudgetCategories() {
+    if ( userFromDb ) {
+      getBudgetCategoriesForAccount( userFromDb._id ).then( ( budget ) => {
+        setCategories( budget );
+        console.log( categories );
+      } );
+    }
+  }
 
   const handleSubmit = () => {
     if ( rows.length != 0 ) {
@@ -40,8 +55,6 @@ export function EditTransaction() {
     Object.assign( tempObj, rows[ index ] );
 
     tempObj[ column ] = value;
-
-    console.log( tempRows[ index ] ); //********* */
     tempRows[ index ] = tempObj;
 
     setRows( tempRows );
@@ -49,49 +62,56 @@ export function EditTransaction() {
 
 
   return (
-    <table className="EditTransaction">
-      <tbody className='AddToTransaction' >
+    <div className="EditingTable">
+      <table className="Table">
+        <thead className="TableHeader">
+          <tr className="row">
+            { headerLabels.map( ( column, index ) => (
+              <th className="text-center" key={ index }>
+                { column }
+              </th>
+            ) ) }
+          </tr>
+        </thead>
+
+        <tbody className='TableBody' >
         { rows.map( ( item, idx ) => (
           <tr key={ idx } onChange={ ( e ) => updateState( e ) }>
             <td>
-              <select className="form-control" column="categoryType" value={ rows[ idx ][ "categoryType" ] } index={ idx } >
+              <select className="category" column="category" value={ rows[ idx ][ "category" ] } index={ idx } >
                 <option value="none" selected disabled hidden>Select</option>
-                <option value="Income">Income</option>
-                <option value="Bill">Bill</option>
-                <option value="Expense">Expense</option>
+                { categories.map( ( category, index ) => (
+                  <option key={ index } value={ category.category }>{ category.category }</option>
+                ) ) }
               </select>
             </td>
             <td>
-              <input type="text" className="form-control" column="category" value={ rows[ idx ][ "category" ] } index={ idx } />
+              <><>$</><input type="number" column="amount" className="amount" value={ rows[ idx ][ "amount" ] } index={ idx } min="0.01" step="0.01" placeholder="0.00" /></>
             </td>
             <td>
-              <><>$</><input type="number" className="form-control" column="amount" value={ rows[ idx ][ "amount" ] } index={ idx } min="0.01" step="0.01" placeholder="0.00" /></>
-            </td>
-            <td>
-              <input type="date" className="form-control" column="date" value={ rows[ idx ][ "date" ] } index={ idx } />
+              <input type="date" className="date" column="date" value={ rows[ idx ][ "date" ] } index={ idx } />
             </td>
             <td>
               <button
-                className="btn btn-outline-danger btn-sm"
+                className="hiddenButton"
                 onClick={ () => handleRemoveSpecificRow( idx ) }>
-                Remove
+                <img className="removeIcon" src={ process.env.PUBLIC_URL + '/remove_icon.png' } />
               </button>
             </td>
           </tr>
         ) ) }
-        <tr>
-          <td>
-            <button onClick={ handleAddRow } className="btn btn-primary" name="submit" alt="Submit Button">
-              Add Row
-            </button>
-          </td>
-          <td>
-            <button onClick={ handleSubmit } className="btn btn-success float-right">
-              Save Results
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table >
+        </tbody>
+      </table>
+
+      <div className='buttonGroupHorizontal'>
+        <button className="hiddenButton" onClick={ handleAddRow } alt="Add Row Button">
+          <img className="addIcon" src={ process.env.PUBLIC_URL + '/add_icon.png' } />
+        </button>
+
+        <button className="submitButton" onClick={ handleSubmit } >
+          Save
+        </button>
+      </div>
+    </div>
   );
 };

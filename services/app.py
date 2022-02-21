@@ -101,6 +101,16 @@ def getBudgetsForAccount(accountId):
         return json_response({'fail': 'budget not found'}, 400)
 
 
+@app.route("/budget/<accountId>/categories")
+def getBudgetCategoriesForAccount(accountId):
+    try:
+        query = list((Budget.select(Budget.category, Budget.categoryType).where(
+            Budget.accountId == accountId)).dicts())
+        return json_response(query, 200)
+    except:
+        return json_response({'fail': 'budget not found'}, 400)
+
+
 @app.route("/budget/add", methods=["GET", "POST"])
 def addBudgetForAccount():
     data = request.get_json()

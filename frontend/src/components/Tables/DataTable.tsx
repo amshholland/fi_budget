@@ -44,6 +44,7 @@ export function DataTable( { rows, headerLabels }: Props ) {
           ) ) }
         </tr>
       </thead>
+
       <tbody className="TableBody">
         { rows.map( ( row, idx ) => (
           <tr className="row" key={ idx }>

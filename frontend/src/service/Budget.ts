@@ -10,6 +10,10 @@ export async function getBudgetsForAccount( accountId: string ): Promise<Budget[
   return axios.get( `${ baseUrl }/budget/${ accountId }` ).then( res => res.data );
 }
 
+export async function getBudgetCategoriesForAccount( accountId: string ): Promise<[]> {
+  return axios.get( `${ baseUrl }/budget/${ accountId }/categories` ).then( res => res.data );
+}
+
 export function addBudgetForAccount( rows: Budget[] ): Promise<Budget[]> {
   return axios.post( `${ baseUrl }/budget/add`, rows ).then( res => res.data );
 }

@@ -32,7 +32,7 @@ export function EditRowModal( { row, handleClose } ) {
 
   return (
     <div className="showHideClassName" >
-      <button onClick={ handleClose }>x</button>
+      <button className="closeButton" onClick={ handleClose }>x</button>
       <form>
         <table>
           <tbody>
@@ -54,7 +54,6 @@ export function EditRowModal( { row, handleClose } ) {
                 onClick={ handleSubmit }
                 className='hiddenButton'
               ><img className="saveIcon" src={ process.env.PUBLIC_URL + '/save_icon.jpg' } /></button></td>
-
             </tr>
           </tbody>
         </table>

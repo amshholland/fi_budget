@@ -14,3 +14,16 @@
 .display-none {
     display: none;
 }
+
+.closeButton {
+    font-size: 1em;
+    text-align: center;
+    border: none;
+    height: 22px;
+    width: 22px;
+    border-radius: 4px;
+    background-color: #7dcf46;
+    margin: 3px;
+    color: white;
+    filter: drop-shadow(0 0 3px rgb(0, 0, 0));
+}

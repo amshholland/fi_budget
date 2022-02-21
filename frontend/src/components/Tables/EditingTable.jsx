@@ -41,8 +41,6 @@ export function EditingTable() {
     Object.assign( tempObj, rows[ index ] );
 
     tempObj[ column ] = value;
-
-    console.log( tempRows[ index ] ); //********* */
     tempRows[ index ] = tempObj;
 
     setRows( tempRows );
@@ -92,6 +90,7 @@ export function EditingTable() {
           ) ) }
         </tbody>
       </table>
+
       <div className='buttonGroupHorizontal'>
         <button className="hiddenButton" onClick={ handleAddRow } name="submit" alt="Add Row Button">
           <img className="addIcon" src={ process.env.PUBLIC_URL + '/add_icon.png' } />
