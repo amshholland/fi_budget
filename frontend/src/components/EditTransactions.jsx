@@ -6,11 +6,11 @@ import { AuthContext } from "../context/auth-context";
 import { addTransactionsForAccount } from '../service/Transaction';
 import { getBudgetCategoriesForAccount } from '../service/Budget';
 
-export function EditTransaction() {
+export function EditTransactions() {
   const { userFromDb } = useContext( AuthContext );
   const [ categories, setCategories ] = useState( [] )
   const [ rows, setRows ] = useState( [ {} ] );
-  const headerLabels = [ "Type", "Category", "Amount", "Date", "" ];
+  const headerLabels = [ "Category", "Amount", "Date", "" ];
 
   useEffect( () => {
     getBudgetCategories();
@@ -53,9 +53,11 @@ export function EditTransaction() {
     let tempObj = {};
     Object.assign( tempObj, { "accountId": userFromDb?._id } );
     Object.assign( tempObj, rows[ index ] );
-
+    Object.assign( tempObj, { "budgetMonth": "Feb" } );
+    Object.assign( tempObj, rows[ index ] );
     tempObj[ column ] = value;
     tempRows[ index ] = tempObj;
+    console.log( tempRows[ index ] )
 
     setRows( tempRows );
   };
@@ -91,10 +93,9 @@ export function EditTransaction() {
             <td>
               <input type="date" className="date" column="date" value={ rows[ idx ][ "date" ] } index={ idx } />
             </td>
+            <td><input type="hidden" value="" /></td>
             <td>
-              <button
-                className="hiddenButton"
-                onClick={ () => handleRemoveSpecificRow( idx ) }>
+              <button className="hiddenButton" onClick={ () => handleRemoveSpecificRow( idx ) }>
                 <img className="removeIcon" src={ process.env.PUBLIC_URL + '/remove_icon.png' } />
               </button>
             </td>

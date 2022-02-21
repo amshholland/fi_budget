@@ -41,6 +41,8 @@ export function EditingTable() {
     Object.assign( tempObj, rows[ index ] );
 
     tempObj[ column ] = value;
+
+    console.log( tempRows[ index ] ); //********* */
     tempRows[ index ] = tempObj;
 
     setRows( tempRows );

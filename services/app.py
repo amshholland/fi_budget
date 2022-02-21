@@ -55,7 +55,7 @@ class Transaction(BaseModel):
     amount = MoneyField()
     date = CharField()
     budgetMonth = CharField()
-    note = CharField()
+    note = CharField(null=True)
 
     def transactions():
         return (Transaction
@@ -168,7 +168,7 @@ def getTransactionsForAccount(accountId):
             Transaction.accountId == accountId)).dicts())
         return json_response(query, 200)
     except:
-        return json_response({'fail': 'Transaction not found'}, 400)
+        return json_response({'fail': 'budget not found'}, 400)
 
 
 @app.route("/transactions/add", methods=["GET", "POST"])
@@ -176,12 +176,12 @@ def addTransactionsForAccount():
     data = request.get_json()
 
     if request.method == 'POST':
-        query = Budget.insert_many(data)
+        query = Transaction.insert_many(data)
         query.execute()
-    return json_response({'success': 'budget found'}, 200)
+    return json_response({'success': 'transaction found'}, 200)
 
 
-@app.route("/transaction/<id>")
+@app.route("/transactions/<id>")
 def getTransactionByTransactionId(id):
     try:
         query = list((Transaction.select().where(
@@ -201,7 +201,7 @@ def deleteTransaction(id):
         return json_response({'fail': 'budget not found'}, 400)
 
 
-@app.route("/transaction/edit/<id>")
+@app.route("/transactions/edit/<id>")
 def editExistingTransaction(row):
     print(row)
     try:

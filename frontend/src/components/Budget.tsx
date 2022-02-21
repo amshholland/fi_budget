@@ -1,4 +1,4 @@
-import './Budget.css';
+import './BudgetAndTransactions.css';
 
 import { BudgetData } from "./BudgetData";
 import { EditingTable } from "./Tables/EditingTable";

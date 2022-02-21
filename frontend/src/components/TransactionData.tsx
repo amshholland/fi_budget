@@ -12,7 +12,7 @@ export function TransactionData() {
   const [ rows, setRows ] = useState<Transaction[]>( [] );
   const [ dataLoaded, setDataLoaded ] = useState( false );
 
-  const headerLabels = [ "", "Category", "Amount", "Date", "", "" ];
+  const headerLabels = [ "", "", "Category", "Amount", "Date", "", "" ];
 
   useEffect( () => {
     loadTransactionData();
@@ -28,7 +28,7 @@ export function TransactionData() {
   }
 
   return (
-    <table className="ExistingTransactionData">
+    <div className="ExistingTransactionData">
       { !dataLoaded ? (
         <tr><td id="loading">Loading...</td></tr>
       ) : rows.length === 0 ? (
@@ -39,6 +39,6 @@ export function TransactionData() {
         </>
       )
       }
-    </table >
+    </div >
   );
 };

@@ -3,11 +3,8 @@ import './App.css';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { Budget } from './components/Budget';
-import { BudgetData } from './components/BudgetData';
-import { EditTransaction } from './components/EditTransactions';
-import { EditingTable } from './components/Tables/EditingTable';
 import Header from './components/Header/Header';
-import { TransactionData } from './components/TransactionData';
+import { Transactions } from './components/Transactions';
 
 function App() {
   return (
@@ -19,8 +16,7 @@ function App() {
             <Budget />
           </Route>
           <Route path="/transactions">
-            <TransactionData />
-            <EditTransaction />
+            <Transactions />
           </Route>
         </Switch>
       </Router>

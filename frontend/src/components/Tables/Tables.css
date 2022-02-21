@@ -1,4 +1,5 @@
 .ExistingBudgetData,
+.ExistingTransactionData,
 .EditingTable,
 .EditTransactions {
     display: flex;
