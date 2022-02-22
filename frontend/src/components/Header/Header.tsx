@@ -12,7 +12,6 @@ function Header() {
   const { user } = useContext( AuthContext );
   const [ displayNavButtons, setDisplayNavButtons ] = useState( "none" );
   const [ displayUserButtons, setDisplayUserButtons ] = useState( "none" );
-  console.log( displayNavButtons );
 
   function navButtons() {
     if ( displayNavButtons === "none" ) {
