@@ -7,8 +7,8 @@ import { useState } from 'react';
 
 export function EditRowModal( { row, handleClose } ) {
   const [ editRow, setEditRow ] = useState( row );
-  const fieldNames = [ "accountId", "categoryType", "category", "amount", "date", "note", "transactionId" ];
-  const inputTypes = [ "hidden", "text", "text", "number", "date", "text", "hidden" ];
+  const fieldNames = [ "accountId", "categoryType", "category", "amount", "date", "transactionId" ];
+  const inputTypes = [ "hidden", "text", "text", "number", "date", "hidden" ];
 
 
   const updateState = ( e ) => {
@@ -31,12 +31,12 @@ export function EditRowModal( { row, handleClose } ) {
   };
 
   return (
-    <div className="showHideClassName" >
-      <button className="closeButton" onClick={ handleClose }>x</button>
-      <form>
-        <table>
+    <div className="EditRowModal" >
+      <table className="Table">
           <tbody>
-            <tr>
+          <tr>
+            <button className="closeButton" onClick={ handleClose }>x</button>
+
               { fieldNames.map( ( column, index ) => (
                 <td key={ index }>
                   <input
@@ -45,7 +45,7 @@ export function EditRowModal( { row, handleClose } ) {
                     placeholder={ row[ column ] }
                     value={ editRow[ column ] }
                     index={ index }
-                    className="form-control"
+                    className={ column }
                     onChange={ ( e ) => updateState( e ) }
                   />
                 </td>
@@ -56,8 +56,7 @@ export function EditRowModal( { row, handleClose } ) {
               ><img className="saveIcon" src={ process.env.PUBLIC_URL + '/save_icon.jpg' } /></button></td>
             </tr>
           </tbody>
-        </table>
-      </form>
+      </table>
     </div>
   );
 };

@@ -1,27 +1,32 @@
 import Budget from '../model/budget';
 import Transaction from '../model/transaction';
-import { handleDelete } from '../utils/EditBudget';
+import { bulkDeleteBudgetLineItems } from '../utils/EditBudget';
+import './DeleteRowModal.css';
+import { DataRow } from './Tables/DataRow';
 
 interface Props {
-  row: Budget | Transaction;
+  rows: Budget[] | Transaction[];
+  sendTo: string
   handleClose: () => void;
 }
 
-export function DeleteRowModal( { row, handleClose }: Props ) {
-
-    // alert( `${ row.category } deleted` );
-    // handleClose();
-
+export function DeleteRowModal( { rows, handleClose, sendTo }: Props ) {
 
   return (
-    <div className="showHideClassName" >
-      <button onClick={ handleClose }>x</button>
+    <div className="DeleteRowModal" >
+      <button className="closeButton" onClick={ handleClose }>x</button>
       <h4>Are you sure you want to remove the following row(s)?</h4>
-      {/* <BudgetTable row={ row } /> */ }
-      <button
-        onClick={ () => handleDelete( row.id! ) }
-        className="btn btn-success float-right"
-      ><img className="saveIcon" src={ process.env.PUBLIC_URL + '/save_icon.jpg' } /></button>
+      <div className="flexRow">
+        <table className='Table'>
+          { rows.map( row => (
+            <DataRow row={ row } sendTo={ sendTo } />
+          ) ) }
+        </table>
+        <button className="hiddenButton" onClick={ () => bulkDeleteBudgetLineItems( rows ) }>
+          <img className="deleteIcon" src={ process.env.PUBLIC_URL + '/delete_icon.png' } />
+        </button>
+      </div>
+
     </div >
   );
 };

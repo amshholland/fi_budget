@@ -25,12 +25,45 @@ code {
     text-decoration: none;
 }
 
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
 .buttonGroupHorizontal {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     text-decoration: none;
+}
+
+.transaction {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px black solid;
+    margin: 2px;
+}
+
+.amtContainer {
+    display: flex;
+}
+
+.amount {
+    width: 100px;
+}
+
+.date {
+    width: 125px;
+}
+
+.category {
+    width: 125px;
+}
+
+.categoryType {
+    width: fit-content;
 }
 
 .editIcon,

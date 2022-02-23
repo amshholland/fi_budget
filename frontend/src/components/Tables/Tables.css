@@ -6,18 +6,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90%;
+    width: 85%;
+    min-width: 550px;
     height: 25%;
     margin-left: auto;
     margin-right: auto;
     border: 2px solid #489093;
     background-color: #E6E6E6;
+    border-radius: 4px;
 }
 
 .Table {
     background-color: #E6E6E6;
     table-layout: auto;
-    width: 100%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -51,37 +53,9 @@ td {
     justify-content: center;
 }
 
-.categoryType {
-    width: fit-content;
-}
-
-.transaction {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 2px black solid;
-    margin: 2px;
-}
-
 h2 {
     font-size: 12pt;
     text-align: center;
-}
-
-.amtContainer {
-    display: flex;
-}
-
-.amount {
-    width: 50px;
-}
-
-.date {
-    width: 125px;
-}
-
-.category {
-    width: 125px;
 }
 
 .submitButton {

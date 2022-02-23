@@ -1,6 +1,7 @@
-.EditRowModal {
+.DeleteRowModal {
     position: fixed;
     display: flex;
+    flex-direction: column;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -11,30 +12,18 @@
     padding: 0;
     width: 80vw;
     height: 100px;
-    border: 1px solid #ccc;
+    color: #ccc;
     border: 2px solid rgb(255, 255, 255);
     z-index: 3;
     align-items: center;
     justify-content: center;
 }
 
-.display-block {
-    display: block;
-}
-
-.display-none {
-    display: none;
-}
-
 .closeButton {
-    font-size: 1em;
-    text-align: center;
-    border: none;
-    height: 22px;
-    width: 22px;
-    border-radius: 4px;
-    background-color: #7dcf46;
-    margin: 3px;
-    color: white;
-    filter: drop-shadow(0 0 3px rgb(0, 0, 0));
+    height: 25px;
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    top: 0;
+    filter: drop-shadow(0 0 2px rgb(0, 0, 0));
 }

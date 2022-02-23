@@ -9,9 +9,7 @@ export const handleAddNewBudget = ( rows: Budget[] ) => {
 };
 
 export const handleDelete = ( id: number ) => {
-  console.log( id );
   deleteBudgetByBudgetId( id );
-  console.log( `Row deleted` );
 };
 
 export const bulkDeleteBudgetLineItems = ( rows: Budget[] | Transaction[] ) => {

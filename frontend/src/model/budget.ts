@@ -1,9 +1,10 @@
 export default interface Budget {
   id?: number;
   accountId: string;
-  category: string;
   categoryType: string;
+  category: string;
   amount: number;
   date: string;
   budgetMonth: string;
+  note?: never;
 }

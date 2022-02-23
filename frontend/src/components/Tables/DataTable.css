@@ -1,0 +1,10 @@
+.deleteButtonModal {
+    left: 5%;
+    width: 20px;
+    height: 100vh;
+    margin-top: 50%;
+}
+
+.modal-open {
+    width: 30px;
+}

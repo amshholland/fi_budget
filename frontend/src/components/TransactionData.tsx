@@ -35,7 +35,7 @@ export function TransactionData() {
         <tr><td>Create Your Transaction Below</td></tr>
       ) : (
         <>
-          <DataTable rows={ rows } headerLabels={ headerLabels } />
+              <DataTable rows={ rows } sendTo="transaction" headerLabels={ headerLabels } />
         </>
       )
       }

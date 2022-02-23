@@ -1,4 +1,5 @@
 import './Tables.css';
+import './DataTable.css'
 
 import { bulkDeleteBudgetLineItems, handleDelete } from "../../utils/EditBudget";
 
@@ -8,23 +9,25 @@ import { EditRowModal } from '../EditRowModal';
 import { Modal } from "react-bootstrap";
 import Transaction from '../../model/transaction';
 import { useState } from "react";
+import { DataRow } from './DataRow';
 
 interface Props {
   rows: Budget[] | Transaction[];
   headerLabels: string[];
+  sendTo: string;
 }
 
 
-export function DataTable( { rows, headerLabels }: Props ) {
+export function DataTable( { rows, headerLabels, sendTo }: Props ) {
   const [ editableRow, setEditableRow ] = useState<Budget | Transaction | null>( null );
-  const [ deleteRow, setDeleteRow ] = useState<Budget | Transaction | null>( null );
   const [ deleteRows, setDeleteRows ] = useState<Budget[] | Transaction[] | []>( [] );
+  const [ deleteRow, setDeleteRow ] = useState<Budget[] | Transaction[] | []>( [] );
 
   const openEditModal = ( row: Budget | Transaction ) => setEditableRow( row );
   const closeEditModal = () => setEditableRow( null );
 
-  const openConfirmDeletionModal = ( row: Budget | Transaction ) => setDeleteRow( row );
-  const closeConfirmDeletionModal = () => setDeleteRows( [] );
+  const openConfirmDeletionModal = ( row: any ) => setDeleteRow( prev => [ ...prev, row ] );
+  const closeConfirmDeletionModal = () => setDeleteRow( [] );
 
   const handleAddToDelete = ( row: any ) => {
     console.log( row );
@@ -49,41 +52,31 @@ export function DataTable( { rows, headerLabels }: Props ) {
         { rows.map( ( row, idx ) => (
           <tr className="row" key={ idx }>
             <td className='centeredCell'><input type="checkbox" value={ row.id } onClick={ () => handleAddToDelete( row ) } /></td>
-            <td>categoryType</td>
-            <td>{ row.category }</td>
-            <td>${ row.amount }</td>
-            <td>{ row.date }</td>
-            <td className='centeredCell'><button className='hiddenButton' onClick={ () => openEditModal( row ) }>
-              <img className="editIcon" src={ process.env.PUBLIC_URL + '/edit_icon.png' } />
-            </button>
+            <DataRow row={ rows[ idx ] } sendTo={ sendTo } />
+            <td className='centeredCell'>
+              <button className='hiddenButton' onClick={ () => openEditModal( row ) }>
+                <img className="editIcon" src={ process.env.PUBLIC_URL + '/edit_icon.png' } />
+              </button>
             </td>
             <td className='centeredCell'>
               <button className='hiddenButton' onClick={ () => openConfirmDeletionModal( row ) } >
                 <img className="deleteIcon" src={ process.env.PUBLIC_URL + '/delete_icon.png' } />
               </button>
             </td>
-            <Modal
-              show={ deleteRow !== null }
-              className="mymodal"
-              centered
-            >
-              { deleteRow !== null && (
-                <DeleteRowModal row={ deleteRow! } handleClose={ closeConfirmDeletionModal } />
+            <Modal show={ deleteRow.length !== 0 } className="deleteModal" centered>
+              { deleteRow.length !== 0 && (
+                <DeleteRowModal rows={ deleteRow! } sendTo={ sendTo } handleClose={ closeConfirmDeletionModal } />
               ) }
             </Modal>
           </tr>
         ) ) }
-        <Modal
-          show={ editableRow !== null }
-          className="mymodal"
-          centered
-        >
+        <Modal show={ editableRow !== null } className="mymodal" centered>
           { editableRow !== null && (
             <EditRowModal row={ editableRow } handleClose={ closeEditModal } />
           ) }
         </Modal>
 
-        <Modal show={ deleteRows.length !== 0 } className="mymodal">
+        <Modal show={ deleteRows.length !== 0 } className="deleteButtonModal">
           <button className='hiddenButton' onClick={ () => bulkDeleteBudgetLineItems( deleteRows ) }><img className='deleteIcon' src={ process.env.PUBLIC_URL + '/delete_icon.png' } /></button>
         </Modal>
       </tbody>

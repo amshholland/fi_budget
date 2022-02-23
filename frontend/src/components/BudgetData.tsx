@@ -35,7 +35,7 @@ export function BudgetData() {
         <tr><td>Create Your Budget Below</td></tr>
       ) : (
             <>
-              <DataTable rows={ rows } headerLabels={ headerLabels } />
+              <DataTable rows={ rows } headerLabels={ headerLabels } sendTo="budget" />
             </>
       )
       }
