@@ -12,7 +12,7 @@ export function TransactionData() {
   const [ rows, setRows ] = useState<Transaction[]>( [] );
   const [ dataLoaded, setDataLoaded ] = useState( false );
 
-  const headerLabels = [ "", "", "Category", "Amount", "Date", "", "" ];
+  const headerLabels = [ "", "Category", "Transaction", "Amount", "Date", "" ];
 
   useEffect( () => {
     loadTransactionData();
@@ -22,6 +22,7 @@ export function TransactionData() {
     if ( userFromDb ) {
       getTransactionsForAccount( userFromDb._id! ).then( ( transaction ) => {
         setRows( transaction );
+        console.log( rows )
         setDataLoaded( true );
       } );
     }

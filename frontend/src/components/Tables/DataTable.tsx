@@ -6,7 +6,6 @@ import { bulkDeleteBudgetLineItems, handleDelete } from "../../utils/EditBudget"
 import Budget from "../../model/budget";
 import { DeleteRowModal } from "../DeleteRowModal";
 import { EditRowModal } from '../EditRowModal';
-import { Modal } from "react-bootstrap";
 import Transaction from '../../model/transaction';
 import { useState } from "react";
 import { DataRow } from './DataRow';
@@ -37,6 +36,15 @@ export function DataTable( { rows, headerLabels, sendTo }: Props ) {
   };
 
   return (
+    <div className="DataTable">
+
+      <div className="deleteButtonModal">
+        { deleteRows.length !== 0 && (
+          <button className='hiddenButton' onClick={ () => bulkDeleteBudgetLineItems( deleteRows ) }><img className='deleteIcon' src={ process.env.PUBLIC_URL + '/delete_icon.png' } /></button>
+        ) }
+      </div>
+
+
     <table className="Table">
       <thead className="TableHeader">
         <tr className="row">
@@ -63,23 +71,17 @@ export function DataTable( { rows, headerLabels, sendTo }: Props ) {
                 <img className="deleteIcon" src={ process.env.PUBLIC_URL + '/delete_icon.png' } />
               </button>
             </td>
-            <Modal show={ deleteRow.length !== 0 } className="deleteModal" centered>
               { deleteRow.length !== 0 && (
                 <DeleteRowModal rows={ deleteRow! } sendTo={ sendTo } handleClose={ closeConfirmDeletionModal } />
-              ) }
-            </Modal>
-          </tr>
-        ) ) }
-        <Modal show={ editableRow !== null } className="mymodal" centered>
-          { editableRow !== null && (
+            ) }
+            { editableRow !== null && (
             <EditRowModal row={ editableRow } handleClose={ closeEditModal } />
           ) }
-        </Modal>
+          </tr>
+        ) ) }
 
-        <Modal show={ deleteRows.length !== 0 } className="deleteButtonModal">
-          <button className='hiddenButton' onClick={ () => bulkDeleteBudgetLineItems( deleteRows ) }><img className='deleteIcon' src={ process.env.PUBLIC_URL + '/delete_icon.png' } /></button>
-        </Modal>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   );
 }

@@ -3,6 +3,7 @@ export default interface Transaction {
   accountId: string;
   categoryType?: never;
   category: string;
+  transaction: string;
   amount: number;
   date: string;
   budgetMonth: string;

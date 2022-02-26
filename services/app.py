@@ -52,6 +52,7 @@ class Transaction(BaseModel):
     id = AutoField(null=True)
     accountId = CharField()
     category = CharField()
+    transaction = CharField()
     amount = MoneyField()
     date = CharField()
     budgetMonth = CharField()

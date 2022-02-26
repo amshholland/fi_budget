@@ -1,13 +1,11 @@
 .ExistingBudgetData,
 .ExistingTransactionData,
-.EditingTable,
-.EditTransactions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.EditTransactions,
+.EditingTable {
+    display: table;
+    align-items: flex-start;
+    justify-content: space-around;
     width: 85%;
-    min-width: 550px;
     height: 25%;
     margin-left: auto;
     margin-right: auto;
@@ -16,10 +14,18 @@
     border-radius: 4px;
 }
 
+.ExistingBudgetData {
+    flex-direction: row;
+}
+
+.EditingTable {
+    flex-direction: column;
+}
+
 .Table {
     background-color: #E6E6E6;
-    table-layout: auto;
     width: 90%;
+    align-self: auto;
     margin-left: auto;
     margin-right: auto;
 }

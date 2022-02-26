@@ -2,12 +2,15 @@
 .Transactions {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-content: space-around;
+    justify-content: center;
+    align-content: center;
+    gap: 50px;
     align-self: center;
     margin-top: 90px;
     margin-left: auto;
     margin-right: auto;
     height: 90vh;
     width: 100vw;
+    max-width: 750px;
+    min-width: 700px;
 }

@@ -10,7 +10,7 @@ export function EditTransactions() {
   const { userFromDb } = useContext( AuthContext );
   const [ categories, setCategories ] = useState( [] )
   const [ rows, setRows ] = useState( [ {} ] );
-  const headerLabels = [ "Category", "Amount", "Date", "" ];
+  const headerLabels = [ "Category", "Transaction", "Amount", "Date", "" ];
 
   useEffect( () => {
     getBudgetCategories();

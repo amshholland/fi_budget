@@ -3,6 +3,7 @@ export default interface Budget {
   accountId: string;
   categoryType: string;
   category: string;
+  transaction?: string;
   amount: number;
   date: string;
   budgetMonth: string;

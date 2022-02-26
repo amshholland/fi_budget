@@ -12,6 +12,9 @@ export function DataRow( { row, sendTo }: Props ) {
         ( <td>{ row.categoryType }</td>
         ) }
       <td>{ row.category }</td>
+      { sendTo === "transaction" &&
+        ( <td>{ row.transaction }</td>
+        ) }
       <td>${ row.amount }</td>
       <td>{ row.date }</td>
     </>
