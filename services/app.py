@@ -75,6 +75,7 @@ def get_object_or_404(model, *expressions):
     except model.DoesNotExist:
         abort(404)
 
+
 @app.before_request
 def before_request():
     g.db = database
@@ -87,8 +88,13 @@ def after_request(response):
     return response
 
 
-@app.route("/")
-def hello():
+@app.route("/budget")
+def helloBudget():
+    return "Welcome to Python Flask."
+
+
+@app.route("/transaction")
+def helloTransaction():
     return "Welcome to Python Flask."
 
 
@@ -112,6 +118,16 @@ def getBudgetCategoriesForAccount(accountId):
         return json_response({'fail': 'budget not found'}, 400)
 
 
+@ app.route("/budget/<accountId>/category-types")
+def getBudgetCategoryTypesForAccount(accountId):
+    try:
+        query = list((Budget.select(Budget.categoryType, fn.Sum(Budget.amount)).where(
+            Budget.accountId == accountId).group_by(Budget.categoryType)).dicts())
+        return json_response(query, 200)
+    except:
+        return json_response({'fail': 'budget not found'}, 400)
+
+
 @app.route("/budget/<accountId>/categories-and-amounts")
 def getBudgetCategoriesAndAmounts(accountId):
     try:
@@ -123,6 +139,7 @@ def getBudgetCategoriesAndAmounts(accountId):
         return json_response(query, 200)
     except:
         return json_response({'fail': 'budget not found'}, 400)
+
 
 @app.route("/budget/add", methods=["GET", "POST"])
 def addBudgetForAccount():
@@ -165,20 +182,21 @@ def editExistingBudget(row):
         return json_response({'fail': 'budget not updated'}, 400)
 
 
-@app.route("/budget/<accountId>/summary", methods=["GET", "POST"])
-def getBudgetSummary(accountId):
-    try:
-        bills = Budget.select(fn.SUM(Budget.amount)).where(
-            Budget.categoryType == "bill")
-        return json_response(bills, 200)
-    except:
-        return json_response({'fail': accountId}, 400)
-
 @app.route("/transactions/<accountId>")
 def getTransactionsForAccount(accountId):
     try:
         query = list((Transaction.select().where(
             Transaction.accountId == accountId)).dicts())
+        return json_response(query, 200)
+    except:
+        return json_response({'fail': 'budget not found'}, 400)
+
+
+@ app.route("/transactions/<accountId>/categories")
+def getTransactionsByCategoryForAccount(accountId):
+    try:
+        query = list((Transaction.select(Transaction.category, fn.Sum(Transaction.amount)).where(
+            Transaction.accountId == accountId).group_by(Transaction.category)).dicts())
         return json_response(query, 200)
     except:
         return json_response({'fail': 'budget not found'}, 400)

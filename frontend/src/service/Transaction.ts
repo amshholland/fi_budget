@@ -10,6 +10,15 @@ export async function getTransactionsForAccount( accountId: string ): Promise<Tr
   return axios.get( `${ baseUrl }/transactions/${ accountId }` ).then( res => res.data );
 }
 
+type CategoriesAndTotals = {
+  category: string;
+  sum: string;
+};
+
+export async function getTransactionsByCategoryForAccount( accountId: string ): Promise<CategoriesAndTotals[]> {
+  return axios.get( `${ baseUrl }/transactions/${ accountId }/categories` ).then( res => res.data );
+}
+
 export function addTransactionsForAccount( rows: Transaction[] ): Promise<Transaction[]> {
   console.log( `addTransaction ${ rows }` );
   return axios.post( `${ baseUrl }/transactions/add`, rows ).then( res => res.data );

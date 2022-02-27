@@ -14,7 +14,7 @@ export async function getBudgetCategoriesForAccount( accountId: string ): Promis
   return axios.get( `${ baseUrl }/budget/${ accountId }/categories` ).then( res => res.data );
 }
 
-type CategoriesAndBudgets = {
+export type CategoriesAndBudgets = {
   category: string;
   amount: string;
 };
