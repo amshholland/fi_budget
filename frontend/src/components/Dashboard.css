@@ -1,0 +1,16 @@
+.OverView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 90px;
+    gap: 90px;
+}
+
+.month,
+.year {
+    text-align: center;
+}
