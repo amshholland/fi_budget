@@ -5,7 +5,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Budget } from './components/Budget';
 import Header from './components/Header/Header';
 import { Transactions } from './components/Transactions';
-import { OverView } from './components/Overview';
+import { Dashboard } from './components/Dashboard';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/">
-            <OverView />
+            <Dashboard />
           </Route>
           <Route exact path="/budget">
             <Budget />

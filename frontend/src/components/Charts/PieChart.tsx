@@ -1,20 +1,12 @@
-import { forEach } from "lodash";
 import { useContext, useEffect, useState } from "react";
-import { Chart, GoogleArrayToDataTable } from "react-google-charts";
+import { Chart } from "react-google-charts";
 import { AuthContext } from "../../context/auth-context";
-import Budget from "../../model/budget";
-import Transaction from "../../model/transaction";
-import { getBudgetCategoriesAndBudgetsForAccount, getBudgetsForAccount } from "../../service/Budget";
+import { getBudgetCategoriesAndBudgetsForAccount } from "../../service/Budget";
 
-// interface Props {
-//   data: Budget[] | budget[];
-//   options: any;
-// }
 
 export function PieChart() {
   const { userFromDb } = useContext( AuthContext );
-  const [ categoriesAndAmounts, setCategoriesAndAmounts ] = useState<string[]>( [] );
-  const [ pieChartData, setPieChartData ] = useState<string[][]>();
+  const [ pieChartData, setPieChartData ] = useState<Array<[ category: string, amount: number | string ]>>();
   const [ dataLoaded, setDataLoaded ] = useState( false );
 
   useEffect( () => {
@@ -24,10 +16,11 @@ export function PieChart() {
   function loadBudgetData() {
     if ( userFromDb ) {
       getBudgetCategoriesAndBudgetsForAccount( userFromDb._id! ).then( ( budget ) => {
-        const temp = [ [ "category", "amount" ] ];
+        const temp: Array<[ category: string, amount: number | string ]> = [ [ "category", "amount" ] ];
+        setPieChartData( temp )
         budget.forEach( ( item ) => {
-          temp.push( [ item.category, item.amount ] );
-          console.log( temp );
+          parseFloat( item.amount );
+          temp.push( [ item.category, parseFloat( item.amount ) ] );
         } );
         setPieChartData( temp );
       } );

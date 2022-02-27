@@ -14,6 +14,15 @@ export async function getBudgetCategoriesForAccount( accountId: string ): Promis
   return axios.get( `${ baseUrl }/budget/${ accountId }/categories` ).then( res => res.data );
 }
 
+type CategoriesAndBudgets = {
+  category: string;
+  amount: string;
+};
+
+export async function getBudgetCategoriesAndBudgetsForAccount( accountId: string ): Promise<CategoriesAndBudgets[]> {
+  return axios.get( `${ baseUrl }/budget/${ accountId }/categories-and-amounts` ).then( res => res.data );
+}
+
 export function addBudgetForAccount( rows: Budget[] ): Promise<Budget[]> {
   return axios.post( `${ baseUrl }/budget/add`, rows ).then( res => res.data );
 }
