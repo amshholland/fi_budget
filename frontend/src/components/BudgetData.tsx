@@ -1,11 +1,11 @@
-import './Tables/Tables.css';
-
 import { useContext, useEffect, useState } from 'react';
-
 import { AuthContext } from "../context/auth-context";
 import Budget from '../model/budget';
-import { DataTable } from './Tables/DataTable';
 import { getBudgetsForAccount } from '../service/Budget';
+import { DataTable } from './Tables/DataTable';
+import './Tables/Tables.css';
+
+
 
 export function BudgetData() {
   const { userFromDb } = useContext( AuthContext );
