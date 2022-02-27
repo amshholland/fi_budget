@@ -112,6 +112,18 @@ def getBudgetCategoriesForAccount(accountId):
         return json_response({'fail': 'budget not found'}, 400)
 
 
+@app.route("/budget/<accountId>/categories-and-amounts")
+def getBudgetCategoriesAndAmounts(accountId):
+    try:
+        query = list((Budget.select(Budget.category, Budget.amount).where(
+            (Budget.accountId == accountId) &
+            (Budget.categoryType == "Expense") |
+            (Budget.categoryType == "Bill")))
+            .dicts())
+        return json_response(query, 200)
+    except:
+        return json_response({'fail': 'budget not found'}, 400)
+
 @app.route("/budget/add", methods=["GET", "POST"])
 def addBudgetForAccount():
     data = request.get_json()
