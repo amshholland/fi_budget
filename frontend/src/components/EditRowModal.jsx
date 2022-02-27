@@ -1,9 +1,5 @@
-import './EditRowModal.css';
-
 import { useState } from 'react';
-
-// import { editExistingBudgetLineItem } from '../utils/EditBudget';
-
+import './EditRowModal.css';
 
 export function EditRowModal( { row, handleClose } ) {
   const [ editRow, setEditRow ] = useState( row );

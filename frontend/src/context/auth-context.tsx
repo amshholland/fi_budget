@@ -1,8 +1,8 @@
-import { Account, User } from "../model/account";
-import { ReactNode, createContext, useEffect, useState } from "react";
-
+import { createContext, ReactNode, useEffect, useState } from "react";
 import firebase from '../firebaseConfig';
+import { Account } from "../model/account";
 import { getAccountByGoogleId } from "../service/Account";
+
 
 export interface AuthContextModel {
     user: firebase.User | null;

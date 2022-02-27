@@ -1,9 +1,7 @@
-import './Tables.css';
-
-import { addBudgetForAccount, deleteBudgetByBudgetId, editExistingBudget } from '../../service/Budget';
 import { useContext, useState } from 'react';
-
 import { AuthContext } from "../../context/auth-context";
+import { addBudgetForAccount } from '../../service/Budget';
+import './Tables.css';
 
 export function EditingTable() {
   const { userFromDb } = useContext( AuthContext );
