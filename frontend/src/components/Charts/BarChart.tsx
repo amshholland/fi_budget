@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+
 import { Chart } from "react-google-charts";
 import { getBudgetCategoriesAndBudgetsForAccount } from "../../service/Budget";
 import { getTransactionsByCategoryForAccount } from "../../service/Transaction";
-
 
 export function BarChart() {
   const [ budgetData, setBudgetData ] = useState<Array<[ category: string, amount: number | string ]>>();
@@ -19,7 +19,6 @@ export function BarChart() {
     getBudgetCategoriesAndBudgetsForAccount( "61be257c80c991270c8e8501" ).then( ( budget ) => {
       const temp: Array<[ category: string, amount: number | string ]> = [ [ "category", "amount" ] ];
       budget.forEach( ( item ) => {
-        parseFloat( item.amount );
         temp.push( [ item.category, parseFloat( item.amount ) ] );
       } );
       setBudgetData( temp );
@@ -31,7 +30,6 @@ export function BarChart() {
     getTransactionsByCategoryForAccount( "61be257c80c991270c8e8501" ).then( ( category ) => {
       const temp: Array<[ category: string, sum: number | string ]> = [ [ "category", "Sum" ] ];
       category.forEach( ( item ) => {
-        parseFloat( item.sum );
         temp.push( [ item.category, parseFloat( item.sum ) ] );
       } );
       setTransactionData( temp );
