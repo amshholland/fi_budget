@@ -52,4 +52,17 @@ app.post( "/", async ( req, res ) => {
     }
 } );
 
+app.put( "/", async ( req, res ) => {
+  const newUser = req.body as Account;
+  try {
+    const client = await getClient();
+    const result = await client.db().collection<Account>( 'accounts' ).insertOne( newUser );
+    newUser._id = result.insertedId;
+    res.json( result );
+  } catch ( err ) {
+    console.error( "FAIL", err );
+    res.status( 500 ).json( { message: "Internal Server Error" } );
+  }
+} );
+
 export default functions.https.onRequest( app );

@@ -109,8 +109,8 @@ export function EditTransactions() {
           <img className="addIcon" src={ process.env.PUBLIC_URL + '/add_icon.png' } />
         </button>
 
-        <button className="submitButton" onClick={ handleSubmit } >
-          Save
+        <button className="hiddenButton" onClick={ handleSubmit } >
+          <img className="saveIcon" src={ process.env.PUBLIC_URL + '/save_icon.jpg' } />
         </button>
       </div>
     </div>

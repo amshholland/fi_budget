@@ -1,5 +1,5 @@
-import Transaction from "../../model/transaction";
 import Budget from "../../model/budget";
+import Transaction from "../../model/transaction";
 
 interface Props {
   row: Budget | Transaction;
@@ -15,8 +15,8 @@ export function DataRow( { row, sendTo }: Props ) {
       { sendTo === "transaction" &&
         ( <td>{ row.transaction }</td>
         ) }
-      <td>${ row.amount }</td>
-      <td>{ row.date }</td>
+      <td className="amount">${ row.amount }</td>
+      <td className="date">{ row.date }</td>
     </>
   );
 }

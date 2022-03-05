@@ -1,4 +1,4 @@
-import './BudgetAndTransactions.css';
+import './Tables/Tables.css';
 
 import { EditTransactions } from "./EditTransactions";
 import { TransactionData } from "./TransactionData";

@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import './EditRowModal.css';
+
+import { useState } from 'react';
 
 export function EditRowModal( { row, handleClose } ) {
   const [ editRow, setEditRow ] = useState( row );
@@ -28,11 +29,12 @@ export function EditRowModal( { row, handleClose } ) {
 
   return (
     <div className="EditRowModal" >
-      <table className="Table">
-          <tbody>
+      <button className="hiddenButton" onClick={ handleClose }>
+        <img className="closeIcon" src={ process.env.PUBLIC_URL + '/close_icon.png' } />
+      </button>
+      <table className="modalRow">
+        <tbody>
           <tr>
-            <button className="closeButton" onClick={ handleClose }>x</button>
-
               { fieldNames.map( ( column, index ) => (
                 <td key={ index }>
                   <input
@@ -46,13 +48,13 @@ export function EditRowModal( { row, handleClose } ) {
                   />
                 </td>
               ) ) }
-              <td><button
-                onClick={ handleSubmit }
-                className='hiddenButton'
-              ><img className="saveIcon" src={ process.env.PUBLIC_URL + '/save_icon.jpg' } /></button></td>
-            </tr>
-          </tbody>
+          </tr>
+        </tbody>
       </table>
+      <button
+        onClick={ handleSubmit }
+        className='hiddenButton'
+      ><img className="saveIcon" src={ process.env.PUBLIC_URL + '/save_icon.jpg' } /></button>
     </div>
   );
 };

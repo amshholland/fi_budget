@@ -1,20 +1,14 @@
 .EditRowModal {
-    position: fixed;
-    display: flex;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 835px;
+    height: 100px;
+    padding: 10px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     background: #2F455C;
-    overflow: auto;
     border-radius: 4px;
-    outline: none;
-    max-width: 750px;
-    padding-top: 42px;
-    border: 1px solid #ccc;
-    border: 2px solid rgb(255, 255, 255);
     z-index: 3;
-    align-items: center;
-    justify-content: center;
 }
 
 .display-block {
@@ -25,15 +19,33 @@
     display: none;
 }
 
-.closeButton {
-    font-size: 1em;
-    text-align: center;
+.closeIcon {
+    position: absolute;
+    background: none;
     border: none;
-    height: 22px;
-    width: 22px;
-    border-radius: 4px;
-    background-color: #7dcf46;
-    margin: 3px;
+    text-align: center;
+    height: 15px;
+    right: 95%;
+    top: 15%;
+    bottom: 50.12%;
     color: white;
     filter: drop-shadow(0 0 3px rgb(0, 0, 0));
+}
+
+.modalRow {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    background-color: #E6E6E6;
+}
+
+.saveIcon {
+    position: absolute;
+    top: 72%;
+    left: 50%;
+    right: 50%;
+    width: 25px;
+    height: 25px;
 }
